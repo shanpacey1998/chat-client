@@ -4,10 +4,13 @@
 namespace App\Controller;
 
 
+use ContainerAbbxA0H\getTemplateControllerService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Template;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
     /**
      * @Route("/")
@@ -24,9 +27,14 @@ class ArticleController
      */
     public function show($slug)
     {
-        return new Response(sprintf(
-            'future page to show article %s',
-            $slug
-        ));
+        $comments = [
+          'normal rocks dont taste like bacon though... :(',
+          'yaayy, all the flavour, no calories! im going on an asteroid diet!',
+          'i looovvee bacon!',
+        ];
+        return $this->render('article/show.html.twig', [
+            'title' => ucwords(str_replace('-', ' ', $slug)),
+            'comments' => $comments,
+        ]);
     }
 }
