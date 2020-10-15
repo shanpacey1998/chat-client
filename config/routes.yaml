@@ -1,7 +1,3 @@
 #index:
 #    path: /
-#    controller: App\Controller\ArticleController::homepage
-
-#news:
-#  path: /news/why-asteroids-taste-like-bacon
-#  controller: App\Controller\ArticleController::show
+#    controller: App\Controller\DefaultController::index

@@ -3,12 +3,9 @@
 
 namespace App\Controller;
 
-
-use ContainerAbbxA0H\getTemplateControllerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Template;
 
 class ArticleController extends AbstractController
 {
