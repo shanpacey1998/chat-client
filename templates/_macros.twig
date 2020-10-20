@@ -1,0 +1,12 @@
+{# Included above forms to print errors easily #}
+
+{% macro form_field(type, name, label, value, placeholder) %}
+    <div class="form-group">
+        <label for="form-{{ name }}" class="control-label">{{ label }}</label>
+        {% if type == 'textarea' %}
+            <textarea name="{{ name }}" class="form-control" id="form-{{ name }}" placeholder="{{ placeholder }}">{{ value }}</textarea>
+        {% else %}
+            <input type="{{ type }}" class="form-control" id="form-{{ name }}" name="{{ name }}" placeholder="{{ placeholder }}" value="{{ value }}" />
+        {% endif %}
+    </div>
+{% endmacro %}

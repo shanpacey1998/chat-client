@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+{% import '_macros.twig' as macros %}
+
+{% block body %}
+    {% if errors is defined %}
+        {{ macros.print_errors(errors) }}
+    {% endif %}
+
+    <h2 class="text-center">Chat App</h2>
+
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-md-8">
+            <h4>Register</h4>
+
+
+            <form class="form-register col-md-6" action="{{ path('user_register') }}" method="post">
+                <fieldset>
+                    {{ macros.form_field('email', 'email', 'Email', user.email, 'foo@example.com') }}
+                    {{ macros.form_field('text', 'username', 'Username', user.username, 'herocoder') }}
+                    {{ macros.form_field('password', 'password', 'Password', user.password, '') }}
+                    <div class="form-group">
+                        <button type="submit" class="btn">Login</button>
+                        <a class="cancel-link" href="{{ path('app_login') }}">Cancel</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

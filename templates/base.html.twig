@@ -2,56 +2,31 @@
 <html lang="en">
 
     <head>
-        <title>{% block title %}Welcome to the SpaceBar{% endblock %}</title>
+        <title>{% block title %}Chat App{% endblock %}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-            <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+            <link rel="stylesheet" href="{{ asset('font-awesome.css') }}">
+            <!-- <link rel="stylesheet" href="{# {{ asset('build/app.css') }} #}"> -->
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-bg mb-5">
-            <a style="margin-left: 75px;" class="navbar-brand space-brand" href="{{ path('app_homepage') }}">The Space Bar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav mr-auto">
-                     <li class="nav-item">
-                       <a style="color: #fff;" class="nav-link" href="#">Local Asteroids</a>
-                     </li>
-                     <li class="nav-item">
-                       <a style="color: #fff;" class="nav-link" href="#">Weather</a>
-                     </li>
-                   </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown" style="margin-right: 75px;">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img class="nav-profile-img rounded-circle" src="{{ asset('images/astronaut-profile.png') }}" alt="user profile">
-                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Create Post</a>
-                            <a class="dropdown-item" href="#">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
 
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+        {% endblock %}
 
         <footer class="footer">
             <div class="container text-center">
-                <span class="text-muted">Made with <i class="fa fa-heart" style="color: red;"></i> by the guys and gals at <a href="https://knpuniversity.com">KnpUniversity</a></span>
+                <span class="text-muted">Made with <i class="fa fa-heart" style="color: black;"></i> by Shannon</span>
             </div>
         </footer>
 
@@ -60,8 +35,32 @@
             <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+            <!-- <script src="{#  {{ asset('build/app.js') }} #}" type="text/javascript"></script> -->
+            {{ encore_entry_script_tags('app') }}
+
+            <!-- //The core Firebase JS SDK is always required and must be listed first -->
+            <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+            <!-- //TODO: Add SDKs for Firebase products that you want to use -->
+            <!-- //https://firebase.google.com/docs/web/setup#available-libraries -->
+            <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
+
             <script>
-                $('.dropdown-toggle').dropdown();
+                // Your web app's Firebase configuration
+                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+                const firebaseConfig = {
+                    apiKey: "AIzaSyBV_DgH2jUAZoIHQCt4aTmUgpfBEw4UhJM",
+                    authDomain: "chat-client-464de.firebaseapp.com",
+                    databaseURL: "https://chat-client-464de.firebaseio.com",
+                    projectId: "chat-client-464de",
+                    storageBucket: "chat-client-464de.appspot.com",
+                    messagingSenderId: "285225037584",
+                    appId: "1:285225037584:web:f89021526bf5ff5cfd3f95",
+                    measurementId: "G-JC8P02SP7Y"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                firebase.analytics();
+                const database = firebase.database();
             </script>
         {% endblock %}
     </body>

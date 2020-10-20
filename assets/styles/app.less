@@ -1,0 +1,24 @@
+// Variables
+@link-color: #818181; // sea blue
+@link-color-hover:  darken(@link-color, 10%);
+
+// Usage
+a,
+.link {
+  color: @link-color;
+}
+a:hover {
+  color: @link-color-hover;
+}
+.widget {
+  color: #fff;
+  background: @link-color;
+}
+body {
+  position: relative;
+  background-image: radial-gradient(#428bca, rebeccapurple);
+}
+.form-login {
+  width: 100%;
+  max-width: 330px;
+}
