@@ -38,7 +38,6 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="You really think you can get in without a password?")
      */
     private $password;
 
@@ -47,11 +46,6 @@ class User implements UserInterface
      * @Assert\NotBlank(message="C'mon, choose an awesome username!")
      */
     private $username;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $agreedTermsAt;
 
 
     public function getId(): ?int

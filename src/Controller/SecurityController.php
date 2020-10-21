@@ -82,9 +82,6 @@ class SecurityController extends AbstractController
                 // $form->getData() holds the submitted values
                 // but, the original `$task` variable has also been updated
                 $user = $form->getData();
-                if (true === $form['agreeTerms']->getData()) {
-                    $user->agreeTerms();
-                }
 
                 $em = $this->getDoctrine()->getManager();
 
