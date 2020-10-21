@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -82,6 +82,9 @@ class SecurityController extends AbstractController
                 // $form->getData() holds the submitted values
                 // but, the original `$task` variable has also been updated
                 $user = $form->getData();
+                if (true === $form['agreeTerms']->getData()) {
+                    $user->agreeTerms();
+                }
 
                 $em = $this->getDoctrine()->getManager();
 

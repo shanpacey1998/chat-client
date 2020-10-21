@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
 
 {% block body %}
 
-<h2 class="text-center">Chat App</h2>
+<h2 class="text-center" style="margin: 40px">Chat App</h2>
 
 {% for flashError in app.flashes('verify_email_error') %}
     <div class="alert alert-danger" role="alert">{{ flashError }}</div>
 {% endfor %}
 
+
 <div class="row">
 
     <div class="col-sm-4"></div>
-    <div class="col-md-5">
-        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+    <div class="col-md-4">
 
         {{ form_start(registrationForm) }}
 
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+
         <div class="col">
-            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.email, {help: 'someone@example.com'}) }}
         </div>
 
         <div class="col">
@@ -27,7 +30,7 @@
         </div>
 
         <div class="col">
-            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.username, {help: 'HEY, choose a cool name!'}) }}
         </div>
 
         <div class="col">
@@ -41,3 +44,5 @@
     {{ form_end(registrationForm) }}
 
 {% endblock %}
+
+{% block javascripts %} {{ parent() }} {% endblock %}
