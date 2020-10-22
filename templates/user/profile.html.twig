@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h3 class="text-center">{{ title }}</h3>
+<div class="example-wrapper">
+    <h1>Hello {{ app.user.username }}!</h1>
+</div>
+{% endblock %}

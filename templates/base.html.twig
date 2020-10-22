@@ -17,11 +17,37 @@
     <body>
 
         {% block body %}
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            <nav class="navbar navbar-expand navbar-dark mb-3" style="background-color: black">
+                <a class="navbar" href="{{ path('app_homepage') }}">ChatApp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a style="color: #fff;" class="nav-link" href="{{ path('app_homepage') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: #fff;" class="nav-link" href="{{ path('user_profile') }}">Profile</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class=" rounded-circle" src="{{ asset('') }}" alt="user icon">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ path('user_profile') }}">Profile</a>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            {% endif %}
+            </nav>
         {% endblock %}
 
 

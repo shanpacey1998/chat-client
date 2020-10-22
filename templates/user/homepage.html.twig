@@ -2,7 +2,13 @@
 
 {% block body %}
     {{ parent() }}
-    <h1 class="text-center">{{ title }}</h1>
+    <h3 class="text-center">{{ title }}</h3>
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}
+        </div>
+    {% endif %}
 
     <div class="text-center">
         <p>
