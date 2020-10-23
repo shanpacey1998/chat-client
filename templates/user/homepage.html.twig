@@ -2,14 +2,16 @@
 
 {% block body %}
     {{ parent() }}
+
+{#    {% if app.user %}#}
+
+{#        <div class="container">#}
+{#            <div class="row rounded" style="background-color: #818181">#}
+{#                <h5 class="text-center">You are logged in as {{ app.user.username }}</h5>#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endif %}#}
     <h3 class="text-center">{{ title }}</h3>
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}
-        </div>
-    {% endif %}
-
     <div class="text-center">
         <p>
             Welcome to my all new chat app!

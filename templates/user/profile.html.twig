@@ -5,7 +5,58 @@
 {% block body %}
     {{ parent() }}
     <h3 class="text-center">{{ title }}</h3>
+    </br>
+    </br>
 <div class="example-wrapper">
-    <h1>Hello {{ app.user.username }}!</h1>
+    <h3 class="text-center"></h3>
 </div>
+
+    <div class="container">
+        <div class="row user-menu-container rounded">
+            <div class="col-md-12 user-details">
+                <div class="row rounded" style="background-color: steelblue ">
+                    <div class="col-md-2 no-pad">
+                        <div class="user-image">
+                            <img src="https://robohash.org/{{ app.user.username }}?size=100x100" class="img-responsive thumbnail" alt="profile picture">
+                        </div>
+                    </div>
+                    <div class="col-md-10 no-pad">
+                        <div class="user-pad">
+                            <h3>Welcome back, {{ app.user.username }}</h3>
+                            {% if app.user.email %}
+                                <h4 class="white"><i class="fa fa-envelope"></i> {{ app.user.email }}</h4>
+                            {% endif %}
+                            <a class="btn btn-labeled btn-info" href="{{ path('app_logout') }}">
+                                <span class="btn-label"><i class="fa fa-arrow-circle-left"></i></span>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row overview rounded" style="background-color: #99CDD8 ">
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>Total Messages</h3>
+                        <h4>184</h4>
+                    </div>
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>Unread Messages</h3>
+                        <h4>1,910</h4>
+                    </div>
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>Contacts</h3>
+                        <h4>3,892</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{#    <div>#}
+{#        <img class=" rounded-circle" src="https://robohash.org/{{ app.user.username }}?set=set4" alt="user icon">#}
+{#    </div>#}
+{#    <div>#}
+{#        Email: {{ email }}#}
+{#    </div>#}
+{#    <div>#}
+{#        Username: {{ username }}#}
+{#    </div>#}
 {% endblock %}

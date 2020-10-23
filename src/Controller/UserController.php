@@ -30,8 +30,14 @@ class UserController extends AbstractController
      */
     public function profile()
     {
+        $username = $this->getUser()->getUsername();
+        $email = $this->getUser()->getEmail();
+
+
         return $this->render('user/profile.html.twig', [
-            'title' => 'Profile'
+            'title' => 'Profile',
+            'username' => $username,
+            'email' => $email
         ]);
     }
 }
