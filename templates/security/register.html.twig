@@ -26,7 +26,11 @@
         </div>
 
         <div class="col">
-            {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+            {{ form_row(registrationForm.plainPassword.first , {label: 'Password'}) }}
+        </div>
+
+        <div class="col">
+            {{ form_row(registrationForm.plainPassword.second , {label: 'Repeat Password'}) }}
         </div>
 
         <div class="col">

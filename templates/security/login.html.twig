@@ -11,7 +11,7 @@
         <div class="col-md-4">
 
 
-            <form method="post" class="form-login" novalidate>
+            <form method="post" class="form-login" >
 
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -21,7 +21,7 @@
                 <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
 
                 <label for="inputEmail" class=" form-label">Email</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-login" placeholder="Email" required autofocus>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-login" placeholder="Email" required>
 
                 <label for="inputPassword" class="form-label">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -43,7 +43,8 @@
                 <button class="btn btn-lg btn-primary" type="submit">
                     Login
                 </button>
-                <a id="reg-btn" href="{{ path('user_register') }}">Register</a>
+                <a id="reg-btn" href="{{ path('user_register') }}">Register | </a>
+                <a id="reg-btn" href="{{ path('app_forgot_password_request') }}">Forgot Password</a>
             </form>
         </div>
     </div>
