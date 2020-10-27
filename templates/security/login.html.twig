@@ -1,27 +1,18 @@
 {% extends "/base.html.twig" %}
 
+{% block stylesheets %} {{ parent() }} {% endblock %}
+
 {% block body %}
 
-    <h2 class="text-center">Chat App</h2>
+    <h2 class="text-center" style="margin: 40px">Chat App</h2>
 
     <div class="row">
         <div class="col-sm-4"></div>
-        <div class="col-md-5">
-{#             <h4>Login</h4>#}
+        <div class="col-md-4">
 
 
-{#            <form class="form-login col-md-5" action="{{ path('app_login') }}" method="post">#}
-{#                <fieldset>#}
-{#                    {{ macros.form_field('text', '_username', 'Email', 'foo@example.com') }}#}
-{#                    {{ macros.form_field('password', '_password', 'Password', '') }}#}
-{#                    <div class="form-group">#}
-{#                        <button type="submit" class="btn">Login</button>#}
-{#                        <a id="reg-btn" href="{{ path('user_register') }}">Register</a>#}
-{#                    </div>#}
-{#                </fieldset>#}
-{#            </form>#}
+            <form method="post" class="form-login" novalidate>
 
-            <form method="post" class="form-login">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
@@ -29,15 +20,14 @@
                 </br>
                 <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
 
-                Email<label for="inputEmail" class="sr-only"></label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <label for="inputEmail" class=" form-label">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-login" placeholder="Email" required autofocus>
 
-                Password<label for="inputPassword" class="sr-only"></label>
+                <label for="inputPassword" class="form-label">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
                 <input type="hidden" name="_csrf_token"
-                       value="{{ csrf_token('authenticate') }}"
-                >
+                       value="{{ csrf_token('authenticate') }}">
 
                 {#
                 Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -61,3 +51,4 @@
 
 {% endblock %}
 
+{% block javascripts %} {{ parent() }} {% endblock %}

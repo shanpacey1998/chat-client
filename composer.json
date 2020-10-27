@@ -14,9 +14,12 @@
         "symfony/asset": "^5.0",
         "symfony/console": "^5.0",
         "symfony/flex": "^1.0",
+        "symfony/form": "5.0.*",
         "symfony/framework-bundle": "^5.0",
         "symfony/security-bundle": "5.0.*",
+        "symfony/twig-bridge": "5.0.*",
         "symfony/twig-bundle": "^5.0",
+        "symfony/validator": "5.0.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "^5.0",
         "twig/extra-bundle": "^2.12|^3.0",
@@ -75,7 +78,7 @@
         "symfony": {
             "id": "01C1TW989CK77ZA7B2H4HC9WAG",
             "allow-contrib": false,
-            "require": "5.0.*"
+            "require": "5.1.*"
         }
 
     }

@@ -11,18 +11,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
-
-    /**
-     * @Route("/register", name="user_register")
-     *
-     * @return Response
-     */
-    public function register()
-    {
-
-        return $this->render('user/register.twig', array('user' => new User()));
-    }
-
     /**
      * @Route("/home", name="app_homepage")
      * @return Response
