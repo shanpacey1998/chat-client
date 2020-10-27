@@ -1,5 +1,4 @@
 {% extends "base.html.twig" %}
-{% import '_macros.twig' as macros %}
 
 {% block body %}
     {% if errors is defined %}
@@ -15,10 +14,10 @@
 
 
             <form class="form-register col-md-6" action="{{ path('user_register') }}" method="post">
-                <fieldset>
-                    {{ macros.form_field('email', 'email', 'Email', user.email, 'foo@example.com') }}
-                    {{ macros.form_field('text', 'username', 'Username', user.username, 'herocoder') }}
-                    {{ macros.form_field('password', 'password', 'Password', user.password, '') }}
+{#                <fieldset>#}
+{#                    {{ macros.form_field('email', 'email', 'Email', user.email, 'foo@example.com') }}#}
+{#                    {{ macros.form_field('text', 'username', 'Username', user.username, 'herocoder') }}#}
+{#                    {{ macros.form_field('password', 'password', 'Password', user.password, '') }}#}
                     <div class="form-group">
                         <button type="submit" class="btn">Login</button>
                         <a class="cancel-link" href="{{ path('app_login') }}">Cancel</a>
