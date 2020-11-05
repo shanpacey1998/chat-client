@@ -22,7 +22,7 @@
         <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
         <div class="col">
-            {{ form_row(registrationForm.email, {help: 'someone@example.com'}) }}
+            {{ form_row(registrationForm.email, {help: 'someone@example.com', label: 'Email'}) }}
         </div>
 
         <div class="col">
@@ -34,19 +34,20 @@
         </div>
 
         <div class="col">
-            {{ form_row(registrationForm.username, {help: 'HEY, choose a cool name!'}) }}
+            {{ form_row(registrationForm.username, {help: 'HEY, choose a cool name!', label: 'Username'}) }}
         </div>
 
         <div class="col">
-            {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_row(registrationForm.agreeTerms, {label: 'Agree Terms'}) }}
         </div>
 
 
-    <button class="btn btn-lg btn-primary" type="submit">Register</button>
-    <a id="reg-btn" href="{{ path('app_login') }}">Cancel</a>
+    <button id="register" class="btn btn-lg btn-primary" type="submit">Register</button>
+    <a id="login" href="{{ path('app_login') }}">Cancel</a>
 
     {{ form_end(registrationForm) }}
 
 {% endblock %}
+
 
 {% block javascripts %} {{ parent() }} {% endblock %}

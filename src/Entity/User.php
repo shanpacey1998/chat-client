@@ -24,7 +24,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="Drop your email, peasant!")
+     * @Assert\NotBlank()
      * @Assert\Email()
      */
     private $email;
@@ -43,7 +43,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank(message="C'mon, choose an awesome username!")
+     * @Assert\NotBlank()
      */
     private $username;
 

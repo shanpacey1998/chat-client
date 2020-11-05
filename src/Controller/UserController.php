@@ -21,7 +21,6 @@ class UserController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         return $this->render('user/homepage.html.twig', [
-            'title' => 'Homepage'
         ]);
     }
 
@@ -35,7 +34,6 @@ class UserController extends AbstractController
 
 
         return $this->render('user/profile.html.twig', [
-            'title' => 'Profile',
             'username' => $username,
             'email' => $email
         ]);
