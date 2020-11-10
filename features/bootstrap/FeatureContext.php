@@ -85,26 +85,26 @@ class FeatureContext extends RawMinkContext implements Context
 
     }
 
+//    /**
+//     * @Given /^the admin user "([^"]*)" with password "([^"]*)" and username "([^"]*)" does not exist$/
+//     */
+//    public function theAdminUserDoesNotAlreadyExist($email, $password, $username)
+//    {
+//        $container = $this->bootstrapSymfony();
+//
+//        $user = new User();
+//        $user->setEmail($email);
+//        $user->setPassword($password);
+//        $user->setUsername($username);
+//        $user->setRoles(array('ROLE_ADMIN'));
+//
+//        $em = $container->get('doctrine')->getManager();
+//        $em->persist($user);
+//        $em->flush();
+//    }
+
     /**
-     * @Given /^the admin user "([^"]*)" with password "([^"]*)" and username "([^"]*)" does not exist$/
-     */
-    public function theAdminUserDoesNotAlreadyExist($email, $password, $username)
-    {
-        $container = $this->bootstrapSymfony();
-
-        $user = new User();
-        $user->setEmail($email);
-        $user->setPassword($password);
-        $user->setUsername($username);
-        $user->setRoles(array('ROLE_ADMIN'));
-
-        $em = $container->get('doctrine')->getManager();
-        $em->persist($user);
-        $em->flush();
-    }
-
-    /**
-     *
+     * @BeforeScenario
      */
     public function clearData()
     {

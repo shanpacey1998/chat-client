@@ -93,10 +93,13 @@
                 firebase.analytics();
                 const database = firebase.database();
             </script>
+            <script>
+                 document.getElementById('profile_form_imageFile').style.opacity = '100'; //make bootstrap label for profile file upload invisible
+            </script>
         {% endblock %}
     </body>
-    </br>
-    <footer class="footer text-center" >
+    <br>
+    <footer class="footer text-center">
         <div class="container text-center">
             <span class="text-muted">Made with <i class="fa fa-heart" style=" color: black;"></i> by Shannon</span>
         </div>

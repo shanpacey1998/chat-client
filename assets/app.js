@@ -12,3 +12,5 @@ import './styles/app.less';
 // import $ from 'jquery';
 
 console.log('Hello Webpack Encore! Edit me in assets/app.js');
+
+document.getElementById('profile_form_imageFile').style.opacity = '100'; //make bootstrap label for profile file upload invisible

@@ -18,35 +18,24 @@ class UserProfile
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
      */
     private $imageFilename;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="userProfile", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $email;
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getImagePath(): ?string
     {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
+        return 'uploads/'.$this->getImageFilename();
     }
 
     public function getImageFilename(): ?string
@@ -61,14 +50,14 @@ class UserProfile
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getUser(): ?User
     {
-        return $this->email;
+        return $this->user;
     }
 
-    public function setEmail(string $email): self
+    public function setUser(User $user): self
     {
-        $this->email = $email;
+        $this->user = $user;
 
         return $this;
     }

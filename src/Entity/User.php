@@ -47,7 +47,15 @@ class User implements UserInterface
      */
     private $username;
 
+    /**
+     * @ORM\OneToOne(targetEntity=UserProfile::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userProfile;
 
+
+    /**
+     * @see UserInterface
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -141,6 +149,23 @@ class User implements UserInterface
     public function agreeTerms(): self
     {
         $this->agreedTermsAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getUserProfile(): ?UserProfile
+    {
+        return $this->userProfile;
+    }
+
+    public function setUserProfile(UserProfile $userProfile): self
+    {
+        $this->userProfile = $userProfile;
+
+        // set the owning side of the relation if necessary
+        if ($userProfile->getUser() !== $this) {
+            $userProfile->setUser($this);
+        }
 
         return $this;
     }

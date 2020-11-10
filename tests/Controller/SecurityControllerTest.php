@@ -33,11 +33,11 @@ class SecurityControllerTest extends WebTestCase
     public function testItRegistersUser()
     {
 
-//        $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'username' => '123']);
-//        $this->client->followRedirect();
-//
-//        $this->assertResponseStatusCodeSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-//        $this->assertResponseIsSuccessful();
+        $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'username' => '123']);
+        $this->client->followRedirect();
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
         $this->assertTrue(true);
     }
 
