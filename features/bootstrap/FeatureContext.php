@@ -31,18 +31,6 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
     /**
-     *
-     */
-    public function bootstrapSymfony()
-    {
-        $kernel = new \App\Kernel('test', true);
-        $kernel->boot();
-
-        return $kernel->getContainer();
-
-    }
-
-    /**
      * @Then the application's kernel should use :expected environment
      *
      */
@@ -67,19 +55,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theUserDoesNotExist($email, $password, $username)
     {
-
-        $container = $this->bootstrapSymfony();
-
-//        $em = $container->get('doctrine')->getManager();
-//        $em->createQuery("DELETE FROM chat_client_test.user WHERE username = 'test123';
-//        DELETE FROM chat_client.user WHERE username = 'test123' ")->execute();
-
         $user = new User();
         $user->setEmail($email);
         $user->setPassword($password);
         $user->setUsername($username);
 
-        $em = $container->get('doctrine')->getManager();
+        $em = $this->bootstrapSymfony()->get('doctrine')->getManager();
         $em->persist($user);
         $em->flush();
 
@@ -103,14 +84,31 @@ class FeatureContext extends RawMinkContext implements Context
 //        $em->flush();
 //    }
 
+    public function bootstrapSymfony()
+    {
+        $kernel = new \App\Kernel('test', true);
+        $kernel->boot();
+
+        return $kernel->getContainer();
+
+    }
+
     /**
-     * @BeforeScenario
+     *
      */
     public function clearData()
     {
-        $em = $this->bootstrapSymfony()->get('doctrine')->getManager();
+        $kernel = new \App\Kernel('test', true);
+        $kernel->boot();
+        $kernel->getContainer();
 
-        $em->createQuery('DELETE FROM chat_client_test.user WHERE id >=0')->execute();
+        $em = $kernel->getContainer()->get('doctrine')->getManager();
+
+//        //$users = $em->getRepository('App:User')->findAll();
+//
+        $em->createQuery("DELETE FROM chat_client_test.user WHERE username = 'test123' ");
+        $em->createQuery("DELETE FROM chat_client.user WHERE email = 'test@123.com' ");
+        //$em->remove($users);
     }
 
 }

@@ -1,19 +1,38 @@
 {% extends 'base.html.twig' %}
-
+{% block head %}
+    {{ parent() }}
+{% endblock %}
 {% block body %}
     {{ parent() }}
 
     <h3 class="text-center">Homepage</h3>
+    <br>
     <div class="text-center">
         <p>
-            Welcome to my all new chat app!
+            Welcome to the chat app! To get started, select a contact you would like to chat with!
+        </p><p>
+            Alternatively, you can view your previous chats and continue a conversation below!
         </p>
     </div>
 
-    <div class="text-center">
-        <p>
-            its very boring here rn...
-        </p>
+    <div class="text-center col-md-6 container break">
+        <h5>Contacts</h5>
     </div>
+    <br>
+    <div class="text-center col-md-6 container">
+
+            <div class="profile-box2 rounded-top">
+                <strong>Username</strong>
+            </div>
+
+            {% for contact in contacts %}
+                <div class="profile-box1 text-center border">
+                    <p><a  href="{{ path('message_user') }}">
+                        {{contact.username}}
+                        </a></p>
+                </div>
+            {% endfor %}
+    </div>
+
 
 {% endblock %}
