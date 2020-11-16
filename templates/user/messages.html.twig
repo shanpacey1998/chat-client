@@ -10,11 +10,9 @@
         {% for userMessage in messages %}
                 <div class="profile-box1 text-center border">
                     {% if userMessage is defined %}
-                        {% for message in userMessage %}
-                            <p>
-                                {{ message }}
-                            </p>
-                        {% endfor %}
+                        <p>
+                            {{ userMessage }}
+                        </p>
                     {% endif %}
                 </div>
         {% endfor %}
@@ -28,4 +26,12 @@
         </form>
     </div>
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{#    <script>#}
+{#    setTimeout(function(){#}
+{#        window.location.reload(1);#}
+{#    }, 5000);#}
+{#    </script>#}
 {% endblock %}

@@ -14,7 +14,7 @@ class FirebaseConfig
 
     public function getMessages($user1, $user2)
     {
-        $messages = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1."/")->getValue();
+        $messages = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1."/".$user2)->getValue();
 
        return $messages;
     }
