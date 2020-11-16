@@ -21,15 +21,17 @@
     <br>
     <div class="text-center col-md-6 container">
 
-            <div class="profile-box2 rounded-top">
-                <strong>Username</strong>
-            </div>
+        <div class="profile-box2 rounded-top">
+            <strong>Username</strong>
+        </div>
+
 
             {% for contact in contacts %}
                 <div class="profile-box1 text-center border">
-                    <p><a  href="{{ path('message_user') }}">
+                    <p><a type="submit" href="{{ path('message_user', {'user': contact.username}) }}">
                         {{contact.username}}
-                        </a></p>
+
+                    </a></p>
                 </div>
             {% endfor %}
     </div>
