@@ -74,17 +74,17 @@
 
 
              // clears cache and reloads page every 5 secs
-            // if ( window.history.replaceState ) {
-            //     window.history.replaceState( null, null, window.location.href );
-            // }
-            //  setInterval(function() {
-            //      cache_clear()
-            //  }, 10000);
-            //
-            // function cache_clear() {
-            //     window.location.reload(true);
-            //     // window.location.reload(); use this if you do not remove cache
-            //     }
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+             setInterval(function() {
+                 cache_clear()
+             }, 10000);
+
+            function cache_clear() {
+                window.location.reload(true);
+                // window.location.reload(); use this if you do not remove cache
+                }
 
              document.getElementById('user_form_attachment').style.opacity = '100'; //makes profile file upload elements visible
 
