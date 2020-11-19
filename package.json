@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@symfony/webpack-encore": "symfony/webpack-encore",
+    "encore": "^0.0.30-beta",
     "less": "^3.12.2",
     "less-loader": "^7.0.2",
     "webpack-notifier": "^1.8.0"

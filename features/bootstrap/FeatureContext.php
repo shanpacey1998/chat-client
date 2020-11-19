@@ -15,20 +15,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class FeatureContext extends RawMinkContext implements Context
 {
-    private $passwordEncoder;
-
-    /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
-     *
-     */
-    public function __construct()
-    {
-
-    }
 
     /**
      * @Then the application's kernel should use :expected environment
@@ -55,14 +41,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theUserDoesNotExist($email, $password, $username)
     {
-        $user = new User();
-        $user->setEmail($email);
-        $user->setPassword($password);
-        $user->setUsername($username);
+        $kernel = new \App\Kernel('test', true);
+        $kernel->boot();
+        $em = $kernel->getContainer()->get('doctrine')->getManager();
+        $em->createQuery("DELETE FROM user WHERE username = 'test123' ");
 
-        $em = $this->bootstrapSymfony()->get('doctrine')->getManager();
-        $em->persist($user);
-        $em->flush();
+//        $user2 = new User();
+//        $user2->setEmail($email);
+//        $user2->setPassword($password);
+//        $user2->setUsername($username);
+//        $em->remove($user2);
+//        $em->flush();
 
     }
 
@@ -94,21 +83,23 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
     /**
-     *
+     * @BeforeSuite
      */
-    public function clearData()
+    public static function clearData()
     {
         $kernel = new \App\Kernel('test', true);
         $kernel->boot();
-        $kernel->getContainer();
-
         $em = $kernel->getContainer()->get('doctrine')->getManager();
-
-//        //$users = $em->getRepository('App:User')->findAll();
-//
         $em->createQuery("DELETE FROM chat_client_test.user WHERE username = 'test123' ");
-        $em->createQuery("DELETE FROM chat_client.user WHERE email = 'test@123.com' ");
-        //$em->remove($users);
+        $em->createQuery("DELETE FROM user WHERE username = 'test123' ");
+
+        $user = new User();
+        $user->setEmail('test@123.com');
+        $user->setPassword('test123');
+        $user->setUsername('test123');
+
+        $em->remove($user);
+        $em->flush();
     }
 
 }
