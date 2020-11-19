@@ -15,7 +15,7 @@
         </p>
     </div>
 
-    <div class="text-center col-md-6 container break">
+    <div class="text-center col-md-6 container">
         <h5>Contacts</h5>
     </div>
     <br>
@@ -28,7 +28,7 @@
 
             {% for contact in contacts %}
                 <div class="profile-box1 text-center border">
-                    <p><a type="submit" href="{{ path('message_user', {'user': contact.username}) }}">
+                    <p><a class="profile-box1" type="submit" href="{{ path('message_user', {'user': contact.username}) }}">
                         {{contact.username}}
 
                     </a></p>

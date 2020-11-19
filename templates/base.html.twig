@@ -94,8 +94,11 @@
                 };
                 // Initialize Firebase
                 firebase.initializeApp(firebaseConfig);
-                firebase.analytics();
-                const database = firebase.database();
+
+                const admin = require("firebase-admin");
+                const bucket = admin.storage().bucket();
+
+
             </script>
             <script>
                  document.getElementById('profile_form_imageFile').style.opacity = '100'; //make bootstrap label for profile file upload invisible
