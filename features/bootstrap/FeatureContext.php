@@ -1,14 +1,9 @@
 <?php
+declare(strict_type=1);
 
 use App\Entity\User;
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Driver\Goutte\Client;
-use Behat\MinkExtension\Context\MinkContext;
 use Behat\MinkExtension\Context\RawMinkContext;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Defines application features from the specific context.
@@ -16,19 +11,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class FeatureContext extends RawMinkContext implements Context
 {
     private $passwordEncoder;
-
-    /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
-     *
-     */
-    public function __construct()
-    {
-
-    }
 
     /**
      * @Then the application's kernel should use :expected environment
@@ -66,24 +48,6 @@ class FeatureContext extends RawMinkContext implements Context
 
     }
 
-//    /**
-//     * @Given /^the admin user "([^"]*)" with password "([^"]*)" and username "([^"]*)" does not exist$/
-//     */
-//    public function theAdminUserDoesNotAlreadyExist($email, $password, $username)
-//    {
-//        $container = $this->bootstrapSymfony();
-//
-//        $user = new User();
-//        $user->setEmail($email);
-//        $user->setPassword($password);
-//        $user->setUsername($username);
-//        $user->setRoles(array('ROLE_ADMIN'));
-//
-//        $em = $container->get('doctrine')->getManager();
-//        $em->persist($user);
-//        $em->flush();
-//    }
-
     public function bootstrapSymfony()
     {
         $kernel = new \App\Kernel('test', true);
@@ -93,9 +57,6 @@ class FeatureContext extends RawMinkContext implements Context
 
     }
 
-    /**
-     *
-     */
     public function clearData()
     {
         $kernel = new \App\Kernel('test', true);
@@ -104,11 +65,9 @@ class FeatureContext extends RawMinkContext implements Context
 
         $em = $kernel->getContainer()->get('doctrine')->getManager();
 
-//        //$users = $em->getRepository('App:User')->findAll();
-//
+
         $em->createQuery("DELETE FROM chat_client_test.user WHERE username = 'test123' ");
         $em->createQuery("DELETE FROM chat_client.user WHERE email = 'test@123.com' ");
-        //$em->remove($users);
     }
 
 }

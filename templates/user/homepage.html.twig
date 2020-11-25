@@ -27,12 +27,11 @@
 
 
             {% for contact in contacts %}
-                <div class="profile-box1 text-center border">
-                    <p><a class="profile-box1" type="submit" href="{{ path('message_user', {'user': contact.username}) }}">
-                        {{contact.username}}
-
-                    </a></p>
-                </div>
+            <div class="profile-box1 text-center border">
+                <p><a class="profile-box1" type="submit" href="{{ path('message_user', {'user': contact.username}) }}">
+                    {{contact.username}}
+                </a></p>
+            </div>
             {% endfor %}
     </div>
 

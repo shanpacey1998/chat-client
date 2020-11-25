@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_type=1);
 
 namespace App\Controller;
 
@@ -33,6 +33,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/messages/{user}", name="message_user")
+     * @param FirebaseConfig $firebaseConfig
+     * @param Request $request
+     * @param $user
+     * @return Response
      */
     public function viewUser(FirebaseConfig $firebaseConfig, Request $request, $user)
     {
@@ -70,11 +74,9 @@ class UserController extends AbstractController
                 $uploadedFile = file_get_contents($form['attachment']->getData());
                 $filename = $_FILES['user_form']['name']['attachment'];
                 $firebaseConfig->uploadFile($uploadedFile);
-//                $firebaseConfig->setMessage($filename, $currentUser, $user);
                 $url = $firebaseConfig->storageFileUrl($filename);
                 $firebaseConfig->setMessage($url, $currentUser, $user);
             }
-
 
         }
 
@@ -90,6 +92,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile", name="user_profile")
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @param FirebaseConfig $firebaseConfig
+     * @return Response
      */
     public function profile(Request $request, FileUploader $fileUploader, FirebaseConfig $firebaseConfig)
     {
