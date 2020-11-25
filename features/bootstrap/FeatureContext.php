@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use App\Entity\User;
 use Behat\Behat\Context\Context;
@@ -46,32 +47,8 @@ class FeatureContext extends RawMinkContext implements Context
         $em = $kernel->getContainer()->get('doctrine')->getManager();
         $em->createQuery("DELETE FROM user WHERE username = 'test123' ");
 
-//        $user2 = new User();
-//        $user2->setEmail($email);
-//        $user2->setPassword($password);
-//        $user2->setUsername($username);
-//        $em->remove($user2);
-//        $em->flush();
 
     }
-
-//    /**
-//     * @Given /^the admin user "([^"]*)" with password "([^"]*)" and username "([^"]*)" does not exist$/
-//     */
-//    public function theAdminUserDoesNotAlreadyExist($email, $password, $username)
-//    {
-//        $container = $this->bootstrapSymfony();
-//
-//        $user = new User();
-//        $user->setEmail($email);
-//        $user->setPassword($password);
-//        $user->setUsername($username);
-//        $user->setRoles(array('ROLE_ADMIN'));
-//
-//        $em = $container->get('doctrine')->getManager();
-//        $em->persist($user);
-//        $em->flush();
-//    }
 
     public function bootstrapSymfony()
     {

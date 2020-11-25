@@ -1,10 +1,8 @@
 <?php
-
+declare(strict_type=1);
 
 namespace App\Service;
 
-
-use Kreait\Firebase\Exception\DatabaseException;
 use Kreait\Firebase\Factory;
 
 class FirebaseConfig
@@ -52,10 +50,9 @@ class FirebaseConfig
         }
         elseif ($input == null && $messages != null)
         {
-            // what it needs to do: loop through messages as keys, if that message is unread, update that message's key to read
+            // loop through messages as keys, if that message is unread, update to read
             foreach ($messages as $messageKey => $message)
             {
-
                 if ($message['read'] == false && $message['sent_by'] != $user1)
                 {
 

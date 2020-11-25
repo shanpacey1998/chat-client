@@ -1,8 +1,7 @@
 <?php
-
+declare(strict_type=1);
 
 namespace App\Form;
-
 
 use App\Entity\UserProfile;
 use Symfony\Component\Form\AbstractType;
@@ -13,6 +12,10 @@ use Symfony\Component\Validator\Constraints\Image;
 
 class ProfileFormType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -24,6 +27,9 @@ class ProfileFormType extends AbstractType
             ]);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
