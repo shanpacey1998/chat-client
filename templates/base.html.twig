@@ -26,7 +26,7 @@
         {% endif %}
         {% block body %}
             <nav class="navbar navbar-expand mb-3 nav-style" >
-                <a class="navbar nav-style" href="{{ path('app_homepage') }}">ChatApp</a>
+                <a class="navbar nav-style" >ChatApp</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,7 +36,7 @@
                             <a style="color: #fff;" class="nav-link" href="{{ path('app_homepage') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a style="color: #fff;" class="nav-link" href="{{ path('app_homepage') }}">Messages</a>
+                            <a style="color: #fff;" class="nav-link" href="{{ path('app_homepage') }}"></a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -71,6 +71,7 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
             <script src="/public/build/runtime.js"></script>
             <script src="/public/build/app.js"></script>
+            <script src="/public/build/vendors~app.js" ></script>
             {{ encore_entry_script_tags('app') }}
 
             <!-- //The core Firebase JS SDK is always required and must be listed first -->
@@ -78,31 +79,6 @@
             <!-- //TODO: Add SDKs for Firebase products that you want to use -->
             <!-- //https://firebase.google.com/docs/web/setup#available-libraries -->
             <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
-
-            <script>
-                // Your web app's Firebase configuration
-                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-                const firebaseConfig = {
-                    apiKey: "AIzaSyBV_DgH2jUAZoIHQCt4aTmUgpfBEw4UhJM",
-                    authDomain: "chat-client-464de.firebaseapp.com",
-                    databaseURL: "https://chat-client-464de.firebaseio.com",
-                    projectId: "chat-client-464de",
-                    storageBucket: "chat-client-464de.appspot.com",
-                    messagingSenderId: "285225037584",
-                    appId: "1:285225037584:web:f89021526bf5ff5cfd3f95",
-                    measurementId: "G-JC8P02SP7Y"
-                };
-                // Initialize Firebase
-                firebase.initializeApp(firebaseConfig);
-
-                const admin = require("firebase-admin");
-                const bucket = admin.storage().bucket();
-
-
-            </script>
-            <script>
-                 // document.getElementById('profile_form_imageFile').style.opacity = '100'; //make bootstrap label for profile file upload invisible
-            </script>
         {% endblock %}
     </body>
     <br>

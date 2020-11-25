@@ -11,42 +11,67 @@
                 </div>
             </div>
         </div>
-        <div id="message_box" class="card-body card card1" style="height: 400px">
+        <div id="message_box" class="card-body card card1" >
             {% for userMessage in messages %}
-                {% if userMessage ends with selectedUsername %}
-                    <div class="d-flex justify-content-start mb-4">
-                        <div class="chat-bubble chat-bubble--left">
-                            {% if userMessage starts with "https://" %}
-                                <a id="attachmentFile" target="_blank" href="{{ userMessage }}" download="{{ userMessage }}">
-                                    {{ userMessage }}
-                                </a>
-                             {% else %}
-                                {{ userMessage }}
-                             {% endif %}
-                            <span class="text-muted msg_time">{{ "now"|date("H:m")}}</span>
+
+                    <!-- if the message sender is not the current logged in user (the user that the message is being sent to) then display the message bubble on the left -->
+                    {% if userMessage.sent_by == selectedUsername %}
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="chat-bubble chat-bubble--left">
+                                {% if userMessage.message starts with "https://" %}
+                                    <a id="attachmentFile" target="_blank" href="{{ userMessage.message }}" download="{{ userMessage.message }}">
+                                        {{ userMessage.message }}
+                                    </a>
+                                 {% else %}
+                                    {{ userMessage.message }}
+                                 {% endif %}
+
+                                <!-- if message is unread, display "delivered". if read, then display "seen" -->
+                                {% if userMessage.read == false %}
+                                    <span class="text-muted msg_time">{{ userMessage.sent_at|date("H:i")}} Delivered</span>
+                                {% elseif userMessage.read == true %}
+                                    <span class="text-muted msg_time">{{ userMessage.sent_at|date("H:i")}} Seen</span>
+                                {% endif %}
+
+                            </div>
                         </div>
-                    </div>
-                {% else %}
-                    <div class="d-flex justify-content-end mb-4">
-                        <div class="chat-bubble chat-bubble--right">
-                            {% if userMessage starts with "https://" %}
-                                <a id="attachmentFile" target="_blank" href="{{ userMessage }}" download="{{ userMessage }}">
-                                    {{ userMessage }}
-                                </a>
-                             {% else %}
-                                {{ userMessage }}
-                            {% endif %}
-                            <span class="text-muted msg_time">{{ "now"|date("H:m")}}</span>
+
+                    <!-- else display the messages bubble on the right -->
+                    {% else %}
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="chat-bubble chat-bubble--right">
+
+                                <!-- if message is a file url, display it as a link to that file, else just display the message text -->
+                                {% if userMessage.message starts with "https://" %}
+                                    <a id="attachmentFile" target="_blank" href="{{ userMessage.message }}" download="{{ userMessage.message }}">
+
+                                        {{ userMessage.message }}
+                                    </a>
+                                 {% else %}
+                                    {{ userMessage.message }}
+                                {% endif %}
+
+                                <!-- if message is unread, display "delivered". if read, then display "seen". also show the time the message was sent-->
+                                {% if userMessage.read == false %}
+                                    <span class="text-muted msg_time_send">{{ userMessage.sent_at|date("H:i")}} Delivered</span>
+                                {% elseif userMessage.read == true %}
+                                    <span class="text-muted msg_time_send">{{ userMessage.sent_at|date("H:i")}} Seen</span>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                {% endif %}
+                    {% endif %}
             {% endfor %}
         </div>
+
+        <!--
+            also change read to true when page reloads(?)
+         -->
         <div class="card-footer">
 
-            {{ form_start(userForm, {'method': 'POST', 'action': path('message_user', {'user': selectedUsername})}) }}
+            {{ form_start(userForm, {'method': 'POST', 'action': path('message_user', {'user': selectedUsername})}) }} {# selectedUsername is the $user in controller passed from homepage #}
                 {{ form_row(userForm.messageInput, {'attr': {'placeholder': 'Enter message here...'}}) }}
-                {{ form_row(userForm.attachment) }}<button class="btn btn-primary" type="submit" name="message">Send</button>
+                {{ form_row(userForm.attachment) }}
+            <button class="btn btn-primary" type="submit" name="message">Send</button>
             {{ form_end(userForm) }}
 
         </div>
@@ -77,26 +102,15 @@
                 window.history.replaceState( null, null, window.location.href );
             }
              setInterval(function() {
-                 cache_clear()
-             }, 10000);
-
-            function cache_clear() {
-                window.location.reload(true);
-                // window.location.reload(); use this if you do not remove cache
-                }
+                 window.location.reload(true);
+             }, 5000);
 
              document.getElementById('user_form_attachment').style.opacity = '100'; //makes profile file upload elements visible
 
              //automatically scrolls to show most recent message in chat on refresh
-             let objDiv = document.getElementById("message_box");
+             let objDiv = document.getElementById('message_box');
              objDiv.scrollTop = objDiv.scrollHeight;
 
          });
-    </script>
-    <script>
-        //$("#attachmentFile").on('click')(function(){ document.getElementById('attachmentFile').href.download();   });
-        // function download() {
-        //     document.getElementById('attachmentFile').href.download();
-        // }
     </script>
 {% endblock %}

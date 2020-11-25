@@ -3,73 +3,83 @@
 
 namespace App\Service;
 
-use Kreait\Firebase\Database;
+
+use Kreait\Firebase\Exception\DatabaseException;
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\Storage;
 
 class FirebaseConfig
 {
-    public function __construct(Database $database, Storage $storage)
-    {
-        $this->database = $database;
-        $this->storage = $storage;
-    }
-
     public function getMessages($user1, $user2)
     {
-        $messages = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1."/".$user2)->getValue();
+        $sortUsers = [$user1, $user2];
+        rsort($sortUsers);
+        $sortedUsers = implode('-', $sortUsers); // sorts the users so that the same result is given for both
 
-       return $messages;
+        $db = $this->getDatabase();
+        return $db->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$sortedUsers)->getValue();
     }
 
-    public function getAllMessages($user1)
+    public function getAllMessages()
     {
-        $messages = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1)->getValue();
-
-        return $messages;
+        $db = $this->getDatabase();
+        return $db->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/")->getValue();
     }
 
-    public function setMessage($input, $user1, $user2)
+    public function setMessage($user1, $user2, $input = null)
     {
-        $newPostKey1 = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1)->push()->getKey();
-        $newPostKey2 = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user2)->push()->getKey();
+        $sortUsers = [$user1, $user2];
+        rsort($sortUsers);
+        $sortedUsers = implode('-', $sortUsers);
 
-        $update1 = [
-            $user1.'/'.$newPostKey2 => $input
+        $db = $this->getDatabase();
+        $messages = $db->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$sortedUsers)->getValue();
 
-        ];
-        $update2 = [
-            $user2.'/'.$newPostKey1 => $input
+        if ($input != null)
+        {
+            $key = $db->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1)->push()->getKey(); //get new post key for the message
 
-        ];
+            $update = [
+                '/' . $key => [
+                    'message' => $input,
+                    'sent_at' => date("H:i"),
+                    'read' => false,
+                    'sent_by' => $user1
+                ]
 
-        $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1)
-            ->update($update2);
-        $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user2)
-            ->update($update1);
+            ];
+
+            $db->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$sortedUsers)->update($update);
+        }
+        elseif ($input == null && $messages != null)
+        {
+            // what it needs to do: loop through messages as keys, if that message is unread, update that message's key to read
+            foreach ($messages as $messageKey => $message)
+            {
+
+                if ($message['read'] == false && $message['sent_by'] != $user1)
+                {
+
+                    $update = [
+                        '/' . $messageKey => [
+                            'message' => $message['message'],
+                            'sent_at' => $message['sent_at'],
+                            'read' => true,
+                            'sent_by' => $message['sent_by']
+                        ]
+
+                    ];
+                    $db->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$sortedUsers)->update($update);
+                }
+
+            }
+        }
+
     }
 
-//    public function setFileUrl($url, $user1, $user2, $filename)
-//    {
-//        $update1 = [
-//            $user1.'/'.$filename => $url
-//
-//        ];
-//        $update2 = [
-//            $user2.'/'.$filename => $url
-//
-//        ];
-//
-//        $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1)
-//            ->update($update2);
-//        $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user2)
-//            ->update($update1);
-//    }
 
     public function uploadFile($file)
     {
-        $factory = (new Factory)->withServiceAccount(__DIR__.'/../chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
-        $storage = $factory->createStorage();
+        $storage = $this->getStorage();
         $bucket = $storage->getBucket();
         $bucket->upload($file,
             [
@@ -80,26 +90,31 @@ class FirebaseConfig
 
     public function getFiles()
     {
-        $factory = (new Factory)->withServiceAccount(__DIR__.'/../chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
-        $storage = $factory->createStorage();
+        $storage = $this->getStorage();
         $bucket = $storage->getBucket()->objects();
         return $bucket;
 
     }
 
-    public function getFileUrl($file)
+    public function getDatabase()
     {
-        $factory = (new Factory)->withServiceAccount(__DIR__.'/../chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
-        $storage = $factory->createStorage();
-        $object = $storage->getBucket()->object($file)->signedUrl(time() + 1000 * 60 * 2);
+        $factory = (new Factory)->withServiceAccount($_SERVER['DOCUMENT_ROOT'].'/chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
+        $db = $factory->createDatabase();
 
-        return $object;
+        return $db;
+    }
+
+    public function getStorage()
+    {
+        $factory = (new Factory)->withServiceAccount($_SERVER['DOCUMENT_ROOT'].'/chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
+        $storage = $factory->createStorage();
+
+        return $storage;
     }
 
     function storageFileUrl($name, $path = []) {
         $base = 'https://firebasestorage.googleapis.com/v0/b/';
         $db = 'chat-client-464de.appspot.com/o/';
-        $projectId = 'chat-client-464de';
 
         $url = $base.$db;
         if(sizeof($path) > 0) {

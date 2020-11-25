@@ -20,7 +20,7 @@ class SecurityControllerTest extends WebTestCase
     public function testItLogsInUser()
     {
 
-        $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123']);
+        $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
@@ -33,7 +33,7 @@ class SecurityControllerTest extends WebTestCase
     public function testItRegistersUser()
     {
 
-        $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'username' => '123']);
+        $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'repeat password' => '123', 'username' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());

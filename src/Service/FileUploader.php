@@ -20,6 +20,10 @@ class FileUploader
         $this->uploadsPath = $uploadsPath;
     }
 
+    /**
+     * @param UploadedFile $uploadedFile
+     * @return string
+     */
     public function uploadImage(UploadedFile $uploadedFile): string
     {
         $destination = $this->uploadsPath;

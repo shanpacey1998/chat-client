@@ -8,6 +8,7 @@ use App\Service\FileUploader;
 use App\Entity\UserProfile;
 use App\Form\ProfileFormType;
 use App\Service\FirebaseConfig;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ class UserController extends AbstractController
     /**
      * @Route("/home", name="app_homepage")
      * @return Response
+     * @IsGranted("ROLE_USER")
      */
     public function homepage()
     {
@@ -33,52 +35,64 @@ class UserController extends AbstractController
 
     /**
      * @Route("/messages/{user}", name="message_user")
+     * @IsGranted("ROLE_USER")
+     * @param FirebaseConfig $firebaseConfig
+     * @param Request $request
+     * @param $user
+     * @return Response
      */
     public function viewUser(FirebaseConfig $firebaseConfig, Request $request, $user)
     {
+        // $user is the contact.username selected in homepage
         $currentUser = $this->getUser()->getUsername();
         $messages = $firebaseConfig->getMessages($currentUser, $user);
 
         $form = $this->createForm(UserFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
 
             if ($form['attachment']->getData() && $form['messageInput']->getData() != null )
             {
                 $input = $form['messageInput']->getData();
-                $input2 = $input . " - " . $currentUser;
-                $firebaseConfig->setMessage($input2, $currentUser, $user);
+                $firebaseConfig->setMessage($currentUser, $user, $input);
 
                 /** @var UploadedFile $uploadedFile */
                 $uploadedFile = file_get_contents($form['attachment']->getData());
                 $filename = $_FILES['user_form']['name']['attachment'];
                 $firebaseConfig->uploadFile($uploadedFile);
                 $url = $firebaseConfig->storageFileUrl($filename);
-                $firebaseConfig->setMessage($url, $currentUser, $user);
+                $firebaseConfig->setMessage($currentUser, $user, $url);
 
             }
+
             elseif ($form['messageInput']->getData() != null)
             {
                 $input = $form['messageInput']->getData();
-                $input2 = $input . " - " . $currentUser;
-                $firebaseConfig->setMessage($input2, $currentUser, $user);
+                $firebaseConfig->setMessage($currentUser, $user, $input);
             }
+
             elseif ($form['attachment']->getData() != null)
             {
                 /** @var UploadedFile $uploadedFile */
                 $uploadedFile = file_get_contents($form['attachment']->getData());
                 $filename = $_FILES['user_form']['name']['attachment'];
                 $firebaseConfig->uploadFile($uploadedFile);
-//                $firebaseConfig->setMessage($filename, $currentUser, $user);
                 $url = $firebaseConfig->storageFileUrl($filename);
-                $firebaseConfig->setMessage($url, $currentUser, $user);
+                $firebaseConfig->setMessage($currentUser, $user, $url);
             }
 
 
         }
 
         $files = $firebaseConfig->getFiles();
+
+        if ($request->isMethod("GET"))
+        {
+            // set read to true
+            $firebaseConfig->setMessage($currentUser, $user);
+        }
 
         return $this->render('user/messages.html.twig', [
             'messages' => $messages,
@@ -90,6 +104,11 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile", name="user_profile")
+     * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @param FirebaseConfig $firebaseConfig
+     * @return Response
      */
     public function profile(Request $request, FileUploader $fileUploader, FirebaseConfig $firebaseConfig)
     {
@@ -100,14 +119,15 @@ class UserController extends AbstractController
         $username = $this->getUser()->getUsername();
         $user = $this->getUser();
 
-        $messageCount = count($firebaseConfig->getAllMessages($username));
+        $messageCount = count($firebaseConfig->getAllMessages());
 
         $userProfile = new UserProfile();
 
         $form = $this->createForm(ProfileFormType::class, $userProfile);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
 
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form['imageFile']->getData();

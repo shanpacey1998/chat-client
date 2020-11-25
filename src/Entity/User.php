@@ -54,18 +54,25 @@ class User implements UserInterface
 
 
     /**
-     * @see UserInterface
+     * @return int|null
      */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -77,6 +84,7 @@ class User implements UserInterface
      * A visual identifier that represents this user.
      *
      * @see UserInterface
+     * @return string
      */
     public function getUsername(): string
     {
@@ -84,6 +92,7 @@ class User implements UserInterface
     }
 
     /**
+     * @return array
      * @see UserInterface
      */
     public function getRoles(): array
@@ -95,6 +104,10 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -104,12 +117,17 @@ class User implements UserInterface
 
     /**
      * @see UserInterface
+     * @return string|null
      */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -134,6 +152,10 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @param string $username
+     * @return $this
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -141,23 +163,18 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAgreedTermsAt(): ?\DateTimeInterface
-    {
-        return $this->agreedTermsAt;
-    }
-
-    public function agreeTerms(): self
-    {
-        $this->agreedTermsAt = new \DateTime();
-
-        return $this;
-    }
-
+    /**
+     * @return UserProfile|null
+     */
     public function getUserProfile(): ?UserProfile
     {
         return $this->userProfile;
     }
 
+    /**
+     * @param UserProfile $userProfile
+     * @return $this
+     */
     public function setUserProfile(UserProfile $userProfile): self
     {
         $this->userProfile = $userProfile;

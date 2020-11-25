@@ -29,10 +29,4 @@ class UserFormType extends AbstractType
                 ]
             ]);
     }
-//    public function configureOptions(OptionsResolver $resolver)
-//    {
-//        $resolver->setDefaults([
-//            'data_class' => User::class,
-//        ]);
-//    }
 }

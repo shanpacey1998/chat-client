@@ -23,5 +23,5 @@ yarn-error.log
 ###< symfony/phpunit-bridge ###
 
 ###> friends-of-behat/symfony-extension ###
-/behat.yml
+/behat.yaml
 ###< friends-of-behat/symfony-extension ###

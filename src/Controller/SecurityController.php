@@ -23,26 +23,10 @@ class SecurityController extends AbstractController
      * @Route("/", name="app_login")
      * @param AuthenticationUtils $authenticationUtils
      * @param Request $request
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $authenticator
      * @return Response
      */
-//    public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator): Response
-//    {
-//        // if ($this->getUser()) {
-//        //     return $this->redirectToRoute('target_path');
-//        // }
-//        // get the login error if there is one
-//        $error = $authenticationUtils->getLastAuthenticationError();
-//        // last username entered by the user
-//        $lastUsername = $authenticationUtils->getLastUsername();
-//
-//        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER'))
-//        {
-//            return new RedirectResponse('/public/index.php/home');
-//        }
-//
-//        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-//    }
-
     public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
         // get the login error if there is one
@@ -70,7 +54,6 @@ class SecurityController extends AbstractController
             return new RedirectResponse('/public/index.php/home');
         }
 
-        //return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
         return $this->render('security/login1.html.twig', [
             'loginForm' => $form->createView(),
             'error' => $error,
@@ -83,7 +66,7 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on the firewall');
     }
 
     /**
@@ -100,7 +83,8 @@ class SecurityController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
