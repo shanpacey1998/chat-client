@@ -22,6 +22,7 @@ class SecurityControllerTest extends WebTestCase
     public function testItLogsInUser()
     {
         $kernel = new Kernel('test', true);
+        $kernel->boot();
         $em = $kernel->getContainer()->get('doctrine')->getManager();
 
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'agree terms' => true]);
@@ -33,6 +34,8 @@ class SecurityControllerTest extends WebTestCase
 
     public function testItRegistersUser()
     {
+        $kernel = new Kernel('test', true);
+        $kernel->boot();
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'repeat password' => '123', 'username' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
