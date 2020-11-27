@@ -16,6 +16,7 @@ class SecurityControllerTest extends WebTestCase
 
     public function setUp()
     {
+        $this->bootstrapSymfony();
         $this->client = static::createClient();
         $this->truncateEntities([User::class]);
     }
@@ -34,7 +35,7 @@ class SecurityControllerTest extends WebTestCase
     public function testItRegistersUser()
     {
         $this->bootstrapSymfony();
-        
+
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'repeat password' => '123', 'username' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
