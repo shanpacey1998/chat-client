@@ -3,8 +3,9 @@
 {% block body %}
     {{ parent() }}
 
-<h3 class="text-center">Messages</h3>
+<h3 class="text-center">Message {{ selectedUsername }}</h3>
 
+    <br>
     <div class="text-center col-md-6 container">
         {% for userMessage in messages %}
                 <div class="profile-box1 text-center border">
@@ -19,7 +20,7 @@
         {% endfor %}
     </div><br>
     <div class="text-center col-md-6 container">
-        <form method="post" action="{{ path('message_user') }}">
+        <form method="post" action="{{ path('message_user', {'user': selectedUsername}) }}">
             <label>
                 <input name="message_input" type="text">
             </label>

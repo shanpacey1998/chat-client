@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserFormType;
 use App\Service\FileUploader;
 use App\Repository\UserProfileRepository;
 use App\Repository\UserProfileRepository as profileRepo;
@@ -29,40 +30,30 @@ class UserController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function homepage(FirebaseConfig $firebaseConfig)
+    public function homepage()
     {
         $em = $this->getEntityManager();
         $users = $em->getRepository('App:User')->findAll();
 
-        $currentUser = $this->getUser()->getUsername();
-
-        $messages = $firebaseConfig->getMessages($currentUser);
-
-
         return $this->render('user/homepage.html.twig', [
-            'contacts' => $users,
-            'messages' => $messages
+            'contacts' => $users
         ]);
     }
 
     /**
-     * @Route("/messages", name="message_user")
+     * @Route("/messages/{user}", name="message_user")
      */
-    public function viewUser(FirebaseConfig $firebaseConfig, Request $request)
+    public function viewUser(FirebaseConfig $firebaseConfig, Request $request, $user)
     {
-        $em = $this->getEntityManager();
-        $users = $em->getRepository('App:User')->findAll();
-
-
         $currentUser = $this->getUser()->getUsername();
-        $messages = $firebaseConfig->getMessages($currentUser);
+        $messages = $firebaseConfig->getMessages($currentUser, $user);
 
         $input = $request->request->get('message_input');
-
-        $firebaseConfig->setMessage($input,$currentUser, '124');
+        $firebaseConfig->setMessage($input, $currentUser, $user);
 
         return $this->render('user/messages.html.twig', [
-            'messages' => $messages
+            'messages' => $messages,
+            'selectedUsername' => $user
         ]);
     }
 

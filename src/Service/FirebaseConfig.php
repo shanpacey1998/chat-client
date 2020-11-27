@@ -12,9 +12,9 @@ class FirebaseConfig
         $this->database = $database;
     }
 
-    public function getMessages($user)
+    public function getMessages($user1, $user2)
     {
-        $messages = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user)->getValue();
+        $messages = $this->database->getReferenceFromUrl("https://chat-client-464de.firebaseio.com/messages/".$user1."/")->getValue();
 
        return $messages;
     }
@@ -29,7 +29,7 @@ class FirebaseConfig
 
         ];
         $update2 = [
-            $user2.'/'.$newPostKey2 => $input
+            $user2.'/'.$newPostKey1 => $input
 
         ];
 
