@@ -3,24 +3,16 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Form\UserFormType;
 use App\Service\FileUploader;
-use App\Repository\UserProfileRepository;
-use App\Repository\UserProfileRepository as profileRepo;
 use App\Entity\UserProfile;
 use App\Form\ProfileFormType;
-use App\Repository\UserRepository;
 use App\Service\FirebaseConfig;
-use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
@@ -48,8 +40,13 @@ class UserController extends AbstractController
         $currentUser = $this->getUser()->getUsername();
         $messages = $firebaseConfig->getMessages($currentUser, $user);
 
-        $input = $request->request->get('message_input');
-        $firebaseConfig->setMessage($input, $currentUser, $user);
+        if ($request->isMethod('POST'))
+        {
+            $input = $request->get('message_input');
+            $input2 = $input." - ".$currentUser;
+            $firebaseConfig->setMessage($input2, $currentUser, $user);
+
+        }
 
         return $this->render('user/messages.html.twig', [
             'messages' => $messages,
