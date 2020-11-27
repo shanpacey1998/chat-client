@@ -18,4 +18,8 @@ class UserProfileRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, UserProfile::class);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> daf90324689f116017e1e50a3d230c376734f133
 }

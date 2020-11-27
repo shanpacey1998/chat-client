@@ -1,24 +1,51 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Login{% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
+
 {% block body %}
-    <h2 class="text-center">Chat App</h2>
+
+    <h2 class="text-center" style="margin: 40px">Chat App</h2>
+
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
 
     <div class="row">
 
-        <div class="col-sm-4"></div>
-        <div class="col-md-8">
-            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    <div class="col-sm-4"></div>
+    <div class="col-md-4">
 
-            {{ form_start(loginForm) }}
+        {{ form_start(loginForm) }}
 
-            <div class="col-md-5 center">
-                {{ form_widget(loginForm) }}
-            </div>
+        <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="col">
+            {{ form_row(loginForm.email, {help: 'someone@example.com'}) }}
+        </div>
+
+        <div class="col">
+            {{ form_row(loginForm.plainPassword, {label: 'Password'}) }}
+        </div>
+
+        <div class="col">
+            {{ form_row(loginForm.agreeTerms, {label: 'Agree Terms'}) }}
+        </div>
+
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
     <button type="submit" class="btn btn-primary">Login</button>
-    <a id="reg-btn" href="{{ path('user_register') }}">Register</a>
+    <a id="register" href="{{ path('user_register') }}">Register</a>
 
     {{ form_end(loginForm) }}
 
 
 {% endblock %}
+
+{% block javascripts %} {{ parent() }} {% endblock %}
