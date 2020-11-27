@@ -2474,16 +2474,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "5.11.0",
+            "version": "5.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "83380a3a0f15415b1eab03d3a3db19578e3bb5c5"
+                "reference": "942f679e42e0ddada61aadd59efdbac9186171fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/83380a3a0f15415b1eab03d3a3db19578e3bb5c5",
-                "reference": "83380a3a0f15415b1eab03d3a3db19578e3bb5c5",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/942f679e42e0ddada61aadd59efdbac9186171fc",
+                "reference": "942f679e42e0ddada61aadd59efdbac9186171fc",
                 "shasum": ""
             },
             "require": {
@@ -2499,8 +2499,8 @@
                 "guzzlehttp/promises": "^1.4",
                 "guzzlehttp/psr7": "^1.7",
                 "kreait/clock": "^1.0.1",
-                "kreait/firebase-tokens": "^1.10",
-                "lcobucci/jwt": "^3.3.1",
+                "kreait/firebase-tokens": "^1.12.0",
+                "lcobucci/jwt": "^3.4.1",
                 "mtdowling/jmespath.php": "^2.3",
                 "php": "^7.2|^8.0",
                 "psr/cache": "^1.0",
@@ -2514,7 +2514,7 @@
                 "google/cloud-firestore": "^1.11",
                 "jangregor/phpstan-prophecy": "^0.6.2",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12.15",
+                "phpstan/phpstan": "^0.12.53",
                 "phpstan/phpstan-phpunit": "^0.12.6",
                 "phpunit/phpunit": "^8.5",
                 "symfony/var-dumper": "^5.0"
@@ -2559,20 +2559,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-01T15:25:32+00:00"
+            "time": "2020-11-27T03:45:47+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
-            "version": "1.11.0",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-tokens-php.git",
-                "reference": "26dcb56cb49cea30fd020a416f53f59d2d78a58b"
+                "reference": "326abb3bca9859e97d7869f5fd0c9674950a12da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-tokens-php/zipball/26dcb56cb49cea30fd020a416f53f59d2d78a58b",
-                "reference": "26dcb56cb49cea30fd020a416f53f59d2d78a58b",
+                "url": "https://api.github.com/repos/kreait/firebase-tokens-php/zipball/326abb3bca9859e97d7869f5fd0c9674950a12da",
+                "reference": "326abb3bca9859e97d7869f5fd0c9674950a12da",
                 "shasum": ""
             },
             "require": {
@@ -2581,7 +2581,7 @@
                 "fig/http-message-util": "^1.1",
                 "guzzlehttp/guzzle": "^6.2.1|^7.0",
                 "kreait/clock": "^1.0.1",
-                "lcobucci/jwt": "^3.2",
+                "lcobucci/jwt": "^3.4.1",
                 "php": "^7.0|^8.0",
                 "psr/cache": "^1.0",
                 "psr/simple-cache": "^1.0"
@@ -2589,7 +2589,7 @@
             "require-dev": {
                 "firebase/php-jwt": "^5.0",
                 "friendsofphp/php-cs-fixer": "^2.16",
-                "phpstan/phpstan-phpunit": "^0.9.4|^0.11.2",
+                "phpstan/phpstan-phpunit": "^0.9.4|^0.12",
                 "phpunit/phpunit": "^6.5.14|^7.5.17",
                 "symfony/cache": "^3.4.26|^4.4|^5.0",
                 "symfony/var-dumper": "^3.4|^4.4|^5.0"
@@ -2633,7 +2633,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-04T00:32:51+00:00"
+            "time": "2020-11-27T03:20:28+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -2815,16 +2815,16 @@
         },
         {
             "name": "lcobucci/jwt",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "320b9f05741b24acbbaf1106ed267ff3817fd74d"
+                "reference": "958a9873a63b0244a72f6e354ccc86019ee674a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/320b9f05741b24acbbaf1106ed267ff3817fd74d",
-                "reference": "320b9f05741b24acbbaf1106ed267ff3817fd74d",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/958a9873a63b0244a72f6e354ccc86019ee674a5",
+                "reference": "958a9873a63b0244a72f6e354ccc86019ee674a5",
                 "shasum": ""
             },
             "require": {
@@ -2884,7 +2884,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-25T01:46:26+00:00"
+            "time": "2020-11-27T01:17:14+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6751,12 +6751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "e9d89738788786e7e1dc2ea1865976b5850e881c"
+                "reference": "461b184cfe5c2e677bbd67761aa377914ab48a16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/e9d89738788786e7e1dc2ea1865976b5850e881c",
-                "reference": "e9d89738788786e7e1dc2ea1865976b5850e881c",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/461b184cfe5c2e677bbd67761aa377914ab48a16",
+                "reference": "461b184cfe5c2e677bbd67761aa377914ab48a16",
                 "shasum": ""
             },
             "require": {
@@ -6830,7 +6830,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-28T21:33:29+00:00"
+            "time": "2020-11-26T23:46:31+00:00"
         },
         {
             "name": "symfony/security-bundle",
