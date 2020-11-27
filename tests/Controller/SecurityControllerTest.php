@@ -15,15 +15,15 @@ class SecurityControllerTest extends WebTestCase
 
     public function setUp()
     {
+        $kernel = new Kernel('test', true);
+        $kernel->boot();
+
         $this->client = static::createClient();
         $this->truncateEntities([User::class]);
     }
 
     public function testItLogsInUser()
     {
-        $kernel = new Kernel('test', true);
-        $kernel->boot();
-
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
@@ -33,8 +33,6 @@ class SecurityControllerTest extends WebTestCase
 
     public function testItRegistersUser()
     {
-        $kernel = new Kernel('test', true);
-        $kernel->boot();
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'repeat password' => '123', 'username' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
