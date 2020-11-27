@@ -3,7 +3,3 @@ services:
     autowire: true
     autoconfigure: true
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a925a5dd926723b2d1f86a7925cd3833f1717528
