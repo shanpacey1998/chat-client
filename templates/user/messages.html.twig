@@ -69,8 +69,8 @@
         <div class="card-footer">
 
             {{ form_start(userForm, {'method': 'POST', 'action': path('message_user', {'user': selectedUsername})}) }} {# selectedUsername is the $user in controller passed from homepage #}
-                {{ form_row(userForm.messageInput, {'attr': {'placeholder': 'Enter message here...'}}) }}
-                {{ form_row(userForm.attachment) }}
+            {{ form_row(userForm.messageInput, {'attr': {'placeholder': 'Enter message here...'}}) }}
+            {{ form_row(userForm.attachment) }}
             <button class="btn btn-primary" type="submit" name="message">Send</button>
             {{ form_end(userForm) }}
 
@@ -97,19 +97,14 @@
     <script>
          $(document).ready(function() {
 
-             // clears cache and reloads page every 5 secs
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }
+             if ( window.history.replaceState ) {
+                 window.history.replaceState( null, null, window.location.href );
+             }
              setInterval(function() {
                  window.location.reload(true);
              }, 5000);
 
              document.getElementById('user_form_attachment').style.opacity = '100'; //makes profile file upload elements visible
-
-             //automatically scrolls to show most recent message in chat on refresh
-             let objDiv = document.getElementById('message_box');
-             objDiv.scrollTop = objDiv.scrollHeight;
 
          });
     </script>

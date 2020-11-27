@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_type=1);
 
 namespace App\Controller;
@@ -18,16 +19,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-
     /**
      * @Route("/", name="app_login")
+     *
      * @param AuthenticationUtils $authenticationUtils
      * @param Request $request
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
-     * @return Response
+     *
+     * @return Response|null
      */
-    public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): ?Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -39,52 +41,50 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
-
         }
 
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER'))
-        {
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             return new RedirectResponse('/public/index.php/home');
         }
 
         return $this->render('security/login1.html.twig', [
             'loginForm' => $form->createView(),
             'error' => $error,
-            'last_username' => $lastUsername
+            'last_username' => $lastUsername,
         ]);
     }
 
     /**
      * @Route("/logout", name="app_logout")
      */
-    public function logout()
+    public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on the firewall');
     }
 
     /**
      * @Route("/register", name="user_register")
+     *
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
-     * @return Response
+     *
+     * @return Response|null
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): ?Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -105,8 +105,7 @@ class SecurityController extends AbstractController
             );
         }
 
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER'))
-        {
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             return new RedirectResponse('/public/index.php/home');
         }
 

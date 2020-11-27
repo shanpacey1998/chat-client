@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_type=1);
 
 namespace App\Entity;
@@ -42,7 +43,7 @@ class UserProfile
      */
     public function getImagePath(): ?string
     {
-        return 'uploads/'.$this->getImageFilename();
+        return 'uploads/' . $this->getImageFilename();
     }
 
     /**
@@ -55,6 +56,7 @@ class UserProfile
 
     /**
      * @param string|null $imageFilename
+     *
      * @return $this
      */
     public function setImageFilename(?string $imageFilename): self
@@ -74,6 +76,7 @@ class UserProfile
 
     /**
      * @param User $user
+     *
      * @return $this
      */
     public function setUser(User $user): self

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_type=1);
 
 namespace App\Entity;
@@ -32,7 +33,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     *
      */
     private $roles = [];
 
@@ -53,7 +53,6 @@ class User implements UserInterface
      */
     private $userProfile;
 
-
     /**
      * @return int|null
      */
@@ -72,6 +71,7 @@ class User implements UserInterface
 
     /**
      * @param string $email
+     *
      * @return $this
      */
     public function setEmail(string $email): self
@@ -85,6 +85,7 @@ class User implements UserInterface
      * A visual identifier that represents this user.
      *
      * @see UserInterface
+     *
      * @return string
      */
     public function getUsername(): string
@@ -94,7 +95,6 @@ class User implements UserInterface
 
     /**
      * @return array
-     * @see UserInterface
      */
     public function getRoles(): array
     {
@@ -107,6 +107,7 @@ class User implements UserInterface
 
     /**
      * @param array $roles
+     *
      * @return $this
      */
     public function setRoles(array $roles): self
@@ -118,6 +119,7 @@ class User implements UserInterface
 
     /**
      * @see UserInterface
+     *
      * @return string|null
      */
     public function getPassword(): ?string
@@ -127,6 +129,7 @@ class User implements UserInterface
 
     /**
      * @param string $password
+     *
      * @return $this
      */
     public function setPassword(string $password): self
@@ -139,15 +142,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
@@ -155,6 +150,7 @@ class User implements UserInterface
 
     /**
      * @param string $username
+     *
      * @return $this
      */
     public function setUsername(string $username): self
@@ -174,6 +170,7 @@ class User implements UserInterface
 
     /**
      * @param UserProfile $userProfile
+     *
      * @return $this
      */
     public function setUserProfile(UserProfile $userProfile): self
@@ -188,4 +185,8 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getSalt(): ?string
+    {
+        return null;
+    }
 }

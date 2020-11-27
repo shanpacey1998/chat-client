@@ -1,0 +1,17 @@
+includes:
+    - '%currentWorkingDirectory%/vendor/wren/dev-tools/phpstan/phpstan.neon'
+    - '%currentWorkingDirectory%/vendor/phpstan/phpstan-phpunit/extension.neon'
+
+parameters:
+    ignoreErrors:
+           - '#Call to an undefined method [a-zA-Z0-9\\_<>]+::(find|get|fetch)[A-Z][a-zA-Z]*\(\)#'
+
+    symfony:
+        container_xml_path: '%currentWorkingDirectory%/var/cache/dev/App_KernelDevDebugContainer.xml'
+
+    bootstrapFiles:
+        - '%currentWorkingDirectory%/vendor/autoload.php'
+
+    checkGenericClassInNonGenericObjectType: false
+
+    checkMissingIterableValueType: false

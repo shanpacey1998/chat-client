@@ -4,8 +4,8 @@ declare(strict_type=1);
 
 namespace App\Tests\Controller;
 
-
 use App\Entity\User;
+use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,20 +21,18 @@ class SecurityControllerTest extends WebTestCase
 
     public function testItLogsInUser()
     {
+        $kernel = new Kernel('test', true);
+        $em = $kernel->getContainer()->get('doctrine')->getManager();
 
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertResponseIsSuccessful();
-
-
-
     }
 
     public function testItRegistersUser()
     {
-
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'repeat password' => '123', 'username' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
 
@@ -43,18 +41,16 @@ class SecurityControllerTest extends WebTestCase
         $this->assertTrue(true);
     }
 
-    public function truncateEntities(Array $entities)
+    public function truncateEntities(array $entities)
     {
         $connection = $this->getEntityManager()->getConnection();
         $dbPlatform = $connection->getDatabasePlatform();
 
-        if ($dbPlatform->supportsForeignKeyConstraints())
-        {
+        if ($dbPlatform->supportsForeignKeyConstraints()) {
             $connection->query('SET FOREIGN_KEY_CHECKS=0');
         }
 
-        foreach ($entities as $entity)
-        {
+        foreach ($entities as $entity) {
             $query = $dbPlatform->getTruncateTableSQL(
                 $this->getEntityManager()->getClassMetadata($entity)->getTableName()
             );
@@ -68,6 +64,8 @@ class SecurityControllerTest extends WebTestCase
 
     public function getEntityManager()
     {
-        return self::$kernel->getContainer()->get('doctrine')->getManager();
+        $kernel = new Kernel('test', true);
+
+        return $em = $kernel->getContainer()->get('doctrine')->getManager();
     }
 }
