@@ -4,24 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "3118d09ea79d8654eb2718610b780871",
-=======
-    "content-hash": "713def0e4a7f784a91c93d65f9a348f2",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
+    "content-hash": "465349f398f30206f7f1b687adbda870",
     "packages": [
         {
             "name": "behat/behat",
-            "version": "v3.8.0",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "304661d4bc00934314c835c79fe36c0ce38da268"
+                "reference": "fbb065457d523d9856d4b50775b4151a7598b510"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/304661d4bc00934314c835c79fe36c0ce38da268",
-                "reference": "304661d4bc00934314c835c79fe36c0ce38da268",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/fbb065457d523d9856d4b50775b4151a7598b510",
+                "reference": "fbb065457d523d9856d4b50775b4151a7598b510",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +84,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2020-11-01T16:09:28+00:00"
+            "time": "2020-11-07T15:55:18+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -642,7 +638,6 @@
         },
         {
             "name": "doctrine/dbal",
-<<<<<<< HEAD
             "version": "2.12.1",
             "source": {
                 "type": "git",
@@ -653,18 +648,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/dbal/zipball/adce7a954a1c2f14f85e94aed90c8489af204086",
                 "reference": "adce7a954a1c2f14f85e94aed90c8489af204086",
-=======
-            "version": "2.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/dbal.git",
-                "reference": "c6d37b4c42aaa3c3ee175f05eca68056f4185646"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/c6d37b4c42aaa3c3ee175f05eca68056f4185646",
-                "reference": "c6d37b4c42aaa3c3ee175f05eca68056f4185646",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 "shasum": ""
             },
             "require": {
@@ -758,11 +741,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2020-11-14T20:26:58+00:00"
-=======
-            "time": "2020-10-22T17:26:24+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1598,34 +1577,17 @@
             "time": "2020-07-30T16:57:33+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "fig/http-message-util",
-            "version": "1.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message-util.git",
-                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message-util/zipball/9d94dc0154230ac39e5bf89398b324a86f63f765",
-                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3 || ^7.0 || ^8.0"
-=======
             "name": "egulias/email-validator",
-            "version": "2.1.23",
+            "version": "2.1.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df"
+                "reference": "ca90a3291eee1538cd48ff25163240695bd95448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
-                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ca90a3291eee1538cd48ff25163240695bd95448",
+                "reference": "ca90a3291eee1538cd48ff25163240695bd95448",
                 "shasum": ""
             },
             "require": {
@@ -1637,7 +1599,6 @@
                 "dominicsayers/isemail": "^3.0.7",
                 "phpunit/phpunit": "^4.8.36|^7.5.15",
                 "satooshi/php-coveralls": "^1.0.1"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -1659,12 +1620,7 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-=======
                     "name": "Eduardo Gulias Davis"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 }
             ],
             "description": "A library for validating emails against several RFCs",
@@ -1676,11 +1632,13 @@
                 "validation",
                 "validator"
             ],
-<<<<<<< HEAD
-            "time": "2020-11-24T22:02:12+00:00"
-=======
-            "time": "2020-10-31T20:37:35+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
+            "funding": [
+                {
+                    "url": "https://github.com/egulias",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-11-14T15:56:27+00:00"
         },
         {
             "name": "fabpot/goutte",
@@ -1739,20 +1697,20 @@
         },
         {
             "name": "fig/http-message-util",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message-util.git",
-                "reference": "3242caa9da7221a304b8f84eb9eaddae0a7cf422"
+                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message-util/zipball/3242caa9da7221a304b8f84eb9eaddae0a7cf422",
-                "reference": "3242caa9da7221a304b8f84eb9eaddae0a7cf422",
+                "url": "https://api.github.com/repos/php-fig/http-message-util/zipball/9d94dc0154230ac39e5bf89398b324a86f63f765",
+                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3 || ^7.0"
+                "php": "^5.3 || ^7.0 || ^8.0"
             },
             "suggest": {
                 "psr/http-message": "The package containing the PSR-7 interfaces"
@@ -1775,7 +1733,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Utility classes and constants for use with PSR-7 (psr/http-message)",
@@ -1787,7 +1745,7 @@
                 "request",
                 "response"
             ],
-            "time": "2020-02-05T20:36:27+00:00"
+            "time": "2020-11-24T22:02:12+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -1962,7 +1920,6 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-<<<<<<< HEAD
             "version": "8.12.13",
             "source": {
                 "type": "git",
@@ -1973,18 +1930,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/571bbbabdab5b1cf16550cb257005bb527fa0899",
                 "reference": "571bbbabdab5b1cf16550cb257005bb527fa0899",
-=======
-            "version": "8.12.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "f3802f572c5fff322a2ccd8d2d792c147ed9e3c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/f3802f572c5fff322a2ccd8d2d792c147ed9e3c4",
-                "reference": "f3802f572c5fff322a2ccd8d2d792c147ed9e3c4",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 "shasum": ""
             },
             "require": {
@@ -2039,11 +1984,7 @@
                 "phonenumber",
                 "validation"
             ],
-<<<<<<< HEAD
             "time": "2020-11-12T14:42:30+00:00"
-=======
-            "time": "2020-10-29T09:27:40+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
         },
         {
             "name": "giggsey/locale",
@@ -2597,7 +2538,6 @@
         },
         {
             "name": "kreait/firebase-php",
-<<<<<<< HEAD
             "version": "5.12.0",
             "source": {
                 "type": "git",
@@ -2608,18 +2548,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/kreait/firebase-php/zipball/942f679e42e0ddada61aadd59efdbac9186171fc",
                 "reference": "942f679e42e0ddada61aadd59efdbac9186171fc",
-=======
-            "version": "5.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "83380a3a0f15415b1eab03d3a3db19578e3bb5c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/83380a3a0f15415b1eab03d3a3db19578e3bb5c5",
-                "reference": "83380a3a0f15415b1eab03d3a3db19578e3bb5c5",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 "shasum": ""
             },
             "require": {
@@ -2695,11 +2623,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
             "time": "2020-11-27T03:45:47+00:00"
-=======
-            "time": "2020-11-01T15:25:32+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
         },
         {
             "name": "kreait/firebase-tokens",
@@ -3857,19 +3781,6 @@
             "time": "2020-10-24T12:01:57+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "symfony/cache",
-            "version": "v5.1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/cache.git",
-                "reference": "d7bc33e9f9028f49f87057e7944c076d9593f046"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/d7bc33e9f9028f49f87057e7944c076d9593f046",
-                "reference": "d7bc33e9f9028f49f87057e7944c076d9593f046",
-=======
             "name": "symfony/browser-kit",
             "version": "v5.1.8",
             "source": {
@@ -3881,7 +3792,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/browser-kit/zipball/65b7d208280f2700f43ba44a8059a25d7b01347b",
                 "reference": "65b7d208280f2700f43ba44a8059a25d7b01347b",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 "shasum": ""
             },
             "require": {
@@ -5731,19 +5641,6 @@
             "time": "2020-10-24T12:01:57+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "symfony/mime",
-            "version": "v5.1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/mime.git",
-                "reference": "f5485a92c24d4bcfc2f3fc648744fb398482ff1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/f5485a92c24d4bcfc2f3fc648744fb398482ff1b",
-                "reference": "f5485a92c24d4bcfc2f3fc648744fb398482ff1b",
-=======
             "name": "symfony/mailer",
             "version": "v5.1.8",
             "source": {
@@ -5755,7 +5652,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/mailer/zipball/fa5cc9f894a5d082e7e46bfdd44f5dd83529f0ba",
                 "reference": "fa5cc9f894a5d082e7e46bfdd44f5dd83529f0ba",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 "shasum": ""
             },
             "require": {
@@ -5822,19 +5718,6 @@
             "time": "2020-10-24T12:01:57+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "symfony/options-resolver",
-            "version": "v5.1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "c6a02905e4ffc7a1498e8ee019db2b477cd1cc02"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/c6a02905e4ffc7a1498e8ee019db2b477cd1cc02",
-                "reference": "c6a02905e4ffc7a1498e8ee019db2b477cd1cc02",
-=======
             "name": "symfony/mime",
             "version": "v5.1.8",
             "source": {
@@ -5846,7 +5729,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/mime/zipball/f5485a92c24d4bcfc2f3fc648744fb398482ff1b",
                 "reference": "f5485a92c24d4bcfc2f3fc648744fb398482ff1b",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 "shasum": ""
             },
             "require": {
@@ -5855,8 +5737,6 @@
                 "symfony/polyfill-mbstring": "^1.0",
                 "symfony/polyfill-php80": "^1.15"
             },
-<<<<<<< HEAD
-=======
             "conflict": {
                 "symfony/mailer": "<4.4"
             },
@@ -5928,7 +5808,6 @@
                 "symfony/deprecation-contracts": "^2.1",
                 "symfony/polyfill-php80": "^1.15"
             },
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -7530,8 +7409,6 @@
                 }
             ],
             "time": "2020-10-24T12:01:57+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "symfony/translation",
@@ -7619,7 +7496,6 @@
                 }
             ],
             "time": "2020-10-24T12:01:57+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
         },
         {
             "name": "symfony/translation-contracts",
@@ -8295,8 +8171,6 @@
                 }
             ],
             "time": "2020-10-24T12:03:25+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "symfonycasts/reset-password-bundle",
@@ -8343,7 +8217,6 @@
             ],
             "description": "Symfony bundle that adds password reset functionality.",
             "time": "2020-04-18T00:37:02+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
         },
         {
             "name": "twig/extra-bundle",
@@ -8485,122 +8358,6 @@
                 }
             ],
             "time": "2020-10-27T19:28:23+00:00"
-<<<<<<< HEAD
-=======
-        },
-        {
-            "name": "zendframework/zend-code",
-            "version": "3.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-code.git",
-                "reference": "268040548f92c2bfcba164421c1add2ba43abaaa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/268040548f92c2bfcba164421c1add2ba43abaaa",
-                "reference": "268040548f92c2bfcba164421c1add2ba43abaaa",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1",
-                "zendframework/zend-eventmanager": "^2.6 || ^3.0"
-            },
-            "conflict": {
-                "phpspec/prophecy": "<1.9.0"
-            },
-            "require-dev": {
-                "doctrine/annotations": "^1.7",
-                "ext-phar": "*",
-                "phpunit/phpunit": "^7.5.16 || ^8.4",
-                "zendframework/zend-coding-standard": "^1.0",
-                "zendframework/zend-stdlib": "^2.7 || ^3.0"
-            },
-            "suggest": {
-                "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
-                "zendframework/zend-stdlib": "Zend\\Stdlib component"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4.x-dev",
-                    "dev-develop": "3.5.x-dev",
-                    "dev-dev-4.0": "4.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Code\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
-            "keywords": [
-                "ZendFramework",
-                "code",
-                "zf"
-            ],
-            "abandoned": "laminas/laminas-code",
-            "time": "2019-12-10T19:21:15+00:00"
-        },
-        {
-            "name": "zendframework/zend-eventmanager",
-            "version": "3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-eventmanager.git",
-                "reference": "a5e2583a211f73604691586b8406ff7296a946dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/a5e2583a211f73604691586b8406ff7296a946dd",
-                "reference": "a5e2583a211f73604691586b8406ff7296a946dd",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "athletic/athletic": "^0.1",
-                "container-interop/container-interop": "^1.1.0",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-stdlib": "^2.7.3 || ^3.0"
-            },
-            "suggest": {
-                "container-interop/container-interop": "^1.1.0, to use the lazy listeners feature",
-                "zendframework/zend-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev",
-                    "dev-develop": "3.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\EventManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Trigger and listen to events within a PHP application",
-            "homepage": "https://github.com/zendframework/zend-eventmanager",
-            "keywords": [
-                "event",
-                "eventmanager",
-                "events",
-                "zf2"
-            ],
-            "abandoned": "laminas/laminas-eventmanager",
-            "time": "2018-04-25T15:33:34+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
         }
     ],
     "packages-dev": [
@@ -8729,27 +8486,24 @@
         },
         {
             "name": "friends-of-behat/page-object-extension",
-            "version": "v0.3.1",
+            "version": "v0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/PageObjectExtension.git",
-                "reference": "b77db7346ba0e8fe60efd5855effe23635dc73d9"
+                "reference": "2e65b0bd7cca6ff2085b0fa885dc13dc57b18d4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/PageObjectExtension/zipball/b77db7346ba0e8fe60efd5855effe23635dc73d9",
-                "reference": "b77db7346ba0e8fe60efd5855effe23635dc73d9",
+                "url": "https://api.github.com/repos/FriendsOfBehat/PageObjectExtension/zipball/2e65b0bd7cca6ff2085b0fa885dc13dc57b18d4b",
+                "reference": "2e65b0bd7cca6ff2085b0fa885dc13dc57b18d4b",
                 "shasum": ""
             },
             "require": {
                 "behat/mink": "^1.7",
-                "php": "^7.1"
-            },
-            "conflict": {
-                "symfony/routing": "<3.4"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "symfony/routing": "^3.4"
+                "symfony/routing": "^3.4 || ^4.4 || ^5.1"
             },
             "suggest": {
                 "symfony/routing": "Allow better support for PageObject pattern in Symfony applications"
@@ -8786,32 +8540,29 @@
                 }
             ],
             "description": "Provides default classes for Page object pattern in Behat",
-            "time": "2019-12-19T10:42:44+00:00"
+            "time": "2020-11-05T20:37:07+00:00"
         },
         {
             "name": "friends-of-behat/service-container-extension",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/ServiceContainerExtension.git",
-                "reference": "5c8ab1bc3e45a37e01da8601aa2aa3a547981586"
+                "reference": "a9d2c71e03f029b13bbbc27146b79aa11a262a17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/ServiceContainerExtension/zipball/5c8ab1bc3e45a37e01da8601aa2aa3a547981586",
-                "reference": "5c8ab1bc3e45a37e01da8601aa2aa3a547981586",
+                "url": "https://api.github.com/repos/FriendsOfBehat/ServiceContainerExtension/zipball/a9d2c71e03f029b13bbbc27146b79aa11a262a17",
+                "reference": "a9d2c71e03f029b13bbbc27146b79aa11a262a17",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "^3.1",
-                "php": "^7.1"
+                "behat/behat": "^3.4",
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
-                "friends-of-behat/cross-container-extension": "^1.0",
-                "friends-of-behat/test-context": "^1.0"
-            },
-            "suggest": {
-                "friends-of-behat/cross-container-extension": "^1.0"
+                "friends-of-behat/test-context": "^1.2",
+                "vimeo/psalm": "4.1.1"
             },
             "type": "library",
             "autoload": {
@@ -8827,11 +8578,11 @@
                 {
                     "name": "Kamil Kokot",
                     "email": "kamil@kokot.me",
-                    "homepage": "http://kamil.kokot.me"
+                    "homepage": "https://kamilkokot.com"
                 }
             ],
             "description": "Allows to declare own services inside Behat container without writing an extension.",
-            "time": "2018-02-13T17:50:03+00:00"
+            "time": "2020-11-05T21:29:41+00:00"
         },
         {
             "name": "friends-of-behat/symfony-extension",
@@ -9152,7 +8903,6 @@
         },
         {
             "name": "symfony/maker-bundle",
-<<<<<<< HEAD
             "version": "v1.24.1",
             "source": {
                 "type": "git",
@@ -9163,18 +8913,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/40b49abf01810453f73e3e239759f1736607f029",
                 "reference": "40b49abf01810453f73e3e239759f1736607f029",
-=======
-            "version": "v1.23.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "ffaee624a20a462ec2da82942d3c9d8fc8dd1421"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/ffaee624a20a462ec2da82942d3c9d8fc8dd1421",
-                "reference": "ffaee624a20a462ec2da82942d3c9d8fc8dd1421",
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
                 "shasum": ""
             },
             "require": {
@@ -9245,11 +8983,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2020-11-25T17:19:22+00:00"
-=======
-            "time": "2020-10-28T15:35:16+00:00"
->>>>>>> daf90324689f116017e1e50a3d230c376734f133
         },
         {
             "name": "symfony/monolog-bridge",
