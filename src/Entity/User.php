@@ -24,13 +24,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="Drop your email, peasant!")
+     * @Assert\NotBlank()
      * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="json")
      *
      */
     private $roles = [];
@@ -43,11 +43,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank(message="C'mon, choose an awesome username!")
+     * @Assert\NotBlank()
      */
     private $username;
 
+    /**
+     * @ORM\OneToOne(targetEntity=UserProfile::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userProfile;
 
+
+    /**
+     * @see UserInterface
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -144,4 +152,22 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getUserProfile(): ?UserProfile
+    {
+        return $this->userProfile;
+    }
+
+    public function setUserProfile(UserProfile $userProfile): self
+    {
+        $this->userProfile = $userProfile;
+
+        // set the owning side of the relation if necessary
+        if ($userProfile->getUser() !== $this) {
+            $userProfile->setUser($this);
+        }
+
+        return $this;
+    }
+
 }
