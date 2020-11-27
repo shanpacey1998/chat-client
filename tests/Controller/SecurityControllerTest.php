@@ -15,8 +15,9 @@ class SecurityControllerTest extends WebTestCase
 
     public function setUp()
     {
-        $kernel = new Kernel('test', true);
+        $kernel = new \App\Kernel('test', true);
         $kernel->boot();
+        $kernel->getContainer();
 
         $this->client = static::createClient();
         $this->truncateEntities([User::class]);
