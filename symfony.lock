@@ -17,8 +17,17 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
+    "brainmaestro/composer-git-hooks": {
+        "version": "v2.8.3"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99"
+    },
+    "composer/semver": {
+        "version": "3.2.4"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.5"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -96,9 +105,6 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
-    "egulias/email-validator": {
-        "version": "2.1.22"
-    },
     "fabpot/goutte": {
         "version": "v4.0.1"
     },
@@ -136,6 +142,18 @@
             "config/services_test.yaml",
             "features/demo.feature",
             "tests/Behat/DemoContext.php"
+        ]
+    },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "cc05ab6abf6894bddb9bbd6a252459010ebe040b"
+        },
+        "files": [
+            ".php_cs.dist"
         ]
     },
     "giggsey/libphonenumber-for-php": {
@@ -180,6 +198,9 @@
     "kreait/firebase-tokens": {
         "version": "1.11.0"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "lcobucci/jwt": {
         "version": "3.3.3"
     },
@@ -195,8 +216,32 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "pdepend/pdepend": {
+        "version": "2.8.0"
+    },
     "php": {
         "version": "7.3"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.1"
+    },
+    "phpmd/phpmd": {
+        "version": "2.9.1"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.57"
+    },
+    "phpstan/phpstan-doctrine": {
+        "version": "0.12.25"
+    },
+    "phpstan/phpstan-php-parser": {
+        "version": "0.12.2"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.12.16"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.11"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -362,7 +407,7 @@
         ]
     },
     "symfony/http-client": {
-        "version": "v5.1.7"
+        "version": "v5.1.8"
     },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
@@ -376,18 +421,6 @@
     "symfony/intl": {
         "version": "v5.0.11"
     },
-    "symfony/mailer": {
-        "version": "4.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.3",
-            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
-        },
-        "files": [
-            "config/packages/mailer.yaml"
-        ]
-    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -398,7 +431,7 @@
         }
     },
     "symfony/mime": {
-        "version": "v5.1.7"
+        "version": "v5.1.8"
     },
     "symfony/monolog-bridge": {
         "version": "v5.1.7"
@@ -480,6 +513,15 @@
     },
     "symfony/proxy-manager-bridge": {
         "version": "v5.1.8"
+    },
+    "symfony/requirements-checker": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "02c6e4b9b117c39e8a23eab7f3840ef6e62293b9"
+        }
     },
     "symfony/routing": {
         "version": "5.1",
@@ -622,23 +664,14 @@
     "symfony/yaml": {
         "version": "v4.0.2"
     },
-    "symfonycasts/reset-password-bundle": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "97c1627c0384534997ae1047b93be517ca16de43"
-        },
-        "files": [
-            "config/packages/reset_password.yaml"
-        ]
-    },
     "twig/extra-bundle": {
         "version": "v3.0.5"
     },
     "twig/twig": {
         "version": "v3.0.5"
+    },
+    "wren/dev-tools": {
+        "version": "2.2.4"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"

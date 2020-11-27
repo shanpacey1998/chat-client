@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_type=1);
 
 namespace App\Security;
@@ -28,9 +29,24 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public const LOGIN_ROUTE = 'app_login';
 
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+
+    /**
+     * @var UrlGeneratorInterface
+     */
     private $urlGenerator;
+
+    /**
+     * @var CsrfTokenManagerInterface
+     */
     private $csrfTokenManager;
+
+    /**
+     * @var UserPasswordEncoderInterface
+     */
     private $passwordEncoder;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
@@ -43,10 +59,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * @param Request $request
+     *
      * @return bool
      */
     // decides whether or not requests needs authentication
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
@@ -54,10 +71,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * @param Request $request
-     * @return array|mixed
+     *
+     * @return array
      */
     //gets credentials from request
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'email' => $request->get('login_form')['email'],
@@ -75,10 +93,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
+     *
      * @return UserInterface|null
      */
     // used credentials to find the right user, if theres no user throw exception
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
         $token = new CsrfToken('login_form', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
@@ -98,17 +117,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * @param mixed $credentials
      * @param UserInterface $user
+     *
      * @return bool
      */
     //checks that the password is valid
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
-     * @param $credentials
+     *
+     * @param mixed $credentials
+     *
      * @return string|null
      */
     public function getPassword($credentials): ?string
@@ -120,26 +142,24 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      * @param Request $request
      * @param TokenInterface $token
      * @param string $providerKey
+     *
      * @return RedirectResponse|Response|null
      */
     //once all checks are done and valid, redirect user as logged in to the homepage
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_homepage'));
-
-
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     /**
      * @return string
      */
-    //if login fails, redirect back to login page
-    protected function getLoginUrl()
+    // if login fails, redirect back to login page
+    protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate('app_login');
     }

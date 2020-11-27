@@ -8,11 +8,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
-
+    /**
+     * @var string
+     */
     private $uploadsPath;
 
     /**
      * FileUploader constructor.
+     *
      * @param string $uploadsPath
      */
     public function __construct(string $uploadsPath)
@@ -20,6 +23,11 @@ class FileUploader
         $this->uploadsPath = $uploadsPath;
     }
 
+    /**
+     * @param UploadedFile $uploadedFile
+     *
+     * @return string
+     */
     public function uploadImage(UploadedFile $uploadedFile): string
     {
         $destination = $this->uploadsPath;
@@ -32,4 +40,3 @@ class FileUploader
         return $newFilename;
     }
 }
-

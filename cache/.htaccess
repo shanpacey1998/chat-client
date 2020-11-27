@@ -1,11 +1,9 @@
-Allow from all
-#AddType application/octet-stream .csv
-#AddType application/octet-stream .xls
-#AddType application/octet-stream .doc
-#AddType application/octet-stream .avi
-#AddType application/octet-stream .mpg
-#AddType application/octet-stream .mov
-#AddType application/octet-stream .pdf
-#AddType application/octet-stream .png
-#AddType application/octet-stream .jpg
-#AddType application/octet-stream .jpeg
+Deny from all
+
+AddType application/octet-stream .csv
+AddType application/octet-stream .xls
+AddType application/octet-stream .doc
+AddType application/octet-stream .avi
+AddType application/octet-stream .mpg
+AddType application/octet-stream .mov
+AddType application/octet-stream .pdf

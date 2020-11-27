@@ -1,19 +1,24 @@
 <?php
-declare(strict_type=1);
+
+declare(strict_types=1);
 
 use App\Entity\User;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines application features from the specific context.
  */
 class FeatureContext extends RawMinkContext implements Context
 {
-    private $passwordEncoder;
-
-
-    /* @Then the application's kernel should use :expected environment
+    /**
+     *
+     * @Then the application's kernel should use :expected environment
+     *
+     * @param string $expected
+     *
+     * @return bool
      */
     public function kernelEnvironmentShouldBe(string $expected)
     {
@@ -22,50 +27,48 @@ class FeatureContext extends RawMinkContext implements Context
 
         $environment = $kernel->getEnvironment();
 
-
         if ($expected == $environment) {
             return true;
         }
+
         return false;
     }
 
     /**
      * @Given /^the user "([^"]*)" with password "([^"]*)" and username "([^"]*)" does not exist$/
+     *
+     * @param string $email
+     * @param string $password
+     * @param string $username
      */
-    public function theUserDoesNotExist($email, $password, $username)
+    public function theUserDoesNotExist(string $email, string $password, string $username): void
     {
-        $container = $this->bootstrapSymfony();
-        $user = new User();
-        $user->setEmail($email);
-        $user->setPassword($password);
-        $user->setUsername($username);
-
-        $em = $this->bootstrapSymfony()->get('doctrine')->getManager();
-        $em->persist($user);
-        $em->flush();
+        $kernel = new \App\Kernel('dev', true);
+        $kernel->boot();
+        $em = $kernel->getContainer()->get('doctrine')->getManager()->getConnection();
+        $em->query("DELETE FROM user WHERE username = 'test123' ");
     }
 
-    public function bootstrapSymfony()
+    /**
+     * @return ContainerInterface
+     */
+    public function bootstrapSymfony(): ContainerInterface
     {
         $kernel = new \App\Kernel('test', true);
         $kernel->boot();
 
         return $kernel->getContainer();
-
     }
 
-    public function clearData()
+    /**
+     * @BeforeSuite
+     */
+    public static function clearData(): void
     {
         $kernel = new \App\Kernel('test', true);
         $kernel->boot();
-        $kernel->getContainer();
-
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
-
-
-        $em->createQuery("DELETE FROM chat_client_test.user WHERE username = 'test123' ");
-        $em->createQuery("DELETE FROM chat_client.user WHERE email = 'test@123.com' ");
+        $em = $kernel->getContainer()->get('doctrine')->getManager()->getConnection();
+        $em->query("DELETE FROM chat_client_test.user WHERE username = 'test123' ");
+        $em->query("DELETE FROM user WHERE username = 'test123' ");
     }
 }
-
-

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_type=1);
 
 namespace App\Form;
@@ -22,7 +23,7 @@ class RegistrationFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class)
@@ -53,7 +54,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
                 'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password']
+                'second_options' => ['label' => 'Repeat Password'],
             ])
         ;
     }
@@ -61,7 +62,7 @@ class RegistrationFormType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,

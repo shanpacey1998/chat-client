@@ -1,13 +1,17 @@
 <?php
+
 declare(strict_type=1);
 
 namespace App\Controller;
 
-use App\Form\UserFormType;
-use App\Service\FileUploader;
+use App\Entity\User;
 use App\Entity\UserProfile;
 use App\Form\ProfileFormType;
+use App\Form\UserFormType;
+use App\Service\FileUploader;
 use App\Service\FirebaseConfig;
+use Doctrine\Persistence\ObjectManager;
+use Kreait\Firebase\Exception\DatabaseException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -17,31 +21,38 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-
     /**
      * @Route("/home", name="app_homepage")
+     *
+     * @return Response|null
      * @IsGranted("ROLE_USER")
-     * @return Response
      */
-    public function homepage()
+    public function homepage(): ?Response
     {
         $em = $this->getEntityManager();
-        $users = $em->getRepository('App:User')->findAll();
+        $users = $em->getRepository(User::class)->findAll();
 
         return $this->render('user/homepage.html.twig', [
-            'contacts' => $users
+            'contacts' => $users,
         ]);
     }
 
     /**
      * @Route("/messages/{user}", name="message_user")
+     *
+     * @IsGranted("ROLE_USER")
+     *
      * @param FirebaseConfig $firebaseConfig
      * @param Request $request
-     * @param $user
-     * @return Response
+     * @param string $user
+     *
+     * @return Response|null
+     *
+     * @throws DatabaseException
      */
-    public function viewUser(FirebaseConfig $firebaseConfig, Request $request, $user)
+    public function viewUser(FirebaseConfig $firebaseConfig, Request $request, string $user): ?Response
     {
+        // $user is the contact.username selected in homepage
         $currentUser = $this->getUser()->getUsername();
         $messages = $firebaseConfig->getMessages($currentUser, $user);
 
@@ -49,40 +60,35 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            if ($form['attachment']->getData() && $form['messageInput']->getData() != null )
-            {
+            if ($form['attachment']->getData() && null != $form['messageInput']->getData()) {
                 $input = $form['messageInput']->getData();
-                $input2 = $input . " - " . $currentUser;
-                $firebaseConfig->setMessage($input2, $currentUser, $user);
+                $firebaseConfig->setMessage($currentUser, $user, $input);
 
                 /** @var UploadedFile $uploadedFile */
                 $uploadedFile = file_get_contents($form['attachment']->getData());
                 $filename = $_FILES['user_form']['name']['attachment'];
                 $firebaseConfig->uploadFile($uploadedFile);
                 $url = $firebaseConfig->storageFileUrl($filename);
-                $firebaseConfig->setMessage($url, $currentUser, $user);
-
-            }
-            elseif ($form['messageInput']->getData() != null)
-            {
+                $firebaseConfig->setMessage($currentUser, $user, $url);
+            } elseif (null != $form['messageInput']->getData()) {
                 $input = $form['messageInput']->getData();
-                $input2 = $input . " - " . $currentUser;
-                $firebaseConfig->setMessage($input2, $currentUser, $user);
-            }
-            elseif ($form['attachment']->getData() != null)
-            {
+                $firebaseConfig->setMessage($currentUser, $user, $input);
+            } elseif (null != $form['attachment']->getData()) {
                 /** @var UploadedFile $uploadedFile */
                 $uploadedFile = file_get_contents($form['attachment']->getData());
                 $filename = $_FILES['user_form']['name']['attachment'];
                 $firebaseConfig->uploadFile($uploadedFile);
                 $url = $firebaseConfig->storageFileUrl($filename);
-                $firebaseConfig->setMessage($url, $currentUser, $user);
+                $firebaseConfig->setMessage($currentUser, $user, $url);
             }
-
         }
 
         $files = $firebaseConfig->getFiles();
+
+        if ($request->isMethod('GET')) {
+            // set read to true
+            $firebaseConfig->setMessage($currentUser, $user);
+        }
 
         return $this->render('user/messages.html.twig', [
             'messages' => $messages,
@@ -94,22 +100,27 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile", name="user_profile")
+     *
+     * @IsGranted("ROLE_USER")
+     *
      * @param Request $request
      * @param FileUploader $fileUploader
      * @param FirebaseConfig $firebaseConfig
-     * @return Response
-     * @IsGranted("ROLE_USER")
+     *
+     * @return Response|null
+     *
+     * @throws DatabaseException
      */
-    public function profile(Request $request, FileUploader $fileUploader, FirebaseConfig $firebaseConfig)
+    public function profile(Request $request, FileUploader $fileUploader, FirebaseConfig $firebaseConfig): ?Response
     {
         $em = $this->getEntityManager();
-        $users = count($em->getRepository('App:User')->findAll());
+        $users = \count($em->getRepository(User::class)->findAll());
 
+        $user = $this->getUser();
         $email = $this->getUser()->getEmail();
         $username = $this->getUser()->getUsername();
-        $user = $this->getUser();
 
-        $messageCount = count($firebaseConfig->getAllMessages($username));
+        $messageCount = \count($firebaseConfig->getAllMessages());
 
         $userProfile = new UserProfile();
 
@@ -117,13 +128,11 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form['imageFile']->getData();
             $existingProfile = $this->getUser()->getUserProfile();
 
-            if ($uploadedFile && $existingProfile == null )
-            {
+            if ($uploadedFile != null && null == $existingProfile) {
                 $newFilename = $fileUploader->uploadImage($uploadedFile);
 
                 $userProfile->setImageFilename($newFilename);
@@ -132,9 +141,7 @@ class UserController extends AbstractController
                 $entityManager = $this->getEntityManager();
                 $entityManager->persist($userProfile);
                 $entityManager->flush();
-            }
-            elseif ($uploadedFile && $existingProfile != null)
-            {
+            } elseif ($uploadedFile != null && null != $existingProfile) {
                 $em = $this->getEntityManager();
 
                 $newFile = $fileUploader->uploadImage($uploadedFile);
@@ -143,8 +150,6 @@ class UserController extends AbstractController
 
                 $em->persist($existingProfile);
                 $em->flush();
-
-
             }
         }
 
@@ -153,11 +158,14 @@ class UserController extends AbstractController
             'username' => $username,
             'email' => $email,
             'contacts' => $users,
-            'msgCount' => $messageCount
+            'msgCount' => $messageCount,
         ]);
     }
 
-    public function getEntityManager()
+    /**
+     * @return ObjectManager
+     */
+    public function getEntityManager(): ObjectManager
     {
         return $em = $this->getDoctrine()->getManager();
     }
