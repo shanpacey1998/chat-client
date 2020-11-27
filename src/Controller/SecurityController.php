@@ -1,4 +1,5 @@
 <?php
+declare(strict_type=1);
 
 namespace App\Controller;
 
@@ -11,7 +12,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -23,6 +23,8 @@ class SecurityController extends AbstractController
      * @Route("/", name="app_login")
      * @param AuthenticationUtils $authenticationUtils
      * @param Request $request
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $authenticator
      * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
@@ -52,7 +54,6 @@ class SecurityController extends AbstractController
             return new RedirectResponse('/public/index.php/home');
         }
 
-        //return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
         return $this->render('security/login1.html.twig', [
             'loginForm' => $form->createView(),
             'error' => $error,

@@ -1,8 +1,9 @@
 <?php
-
+declare(strict_type=1);
 
 namespace App\Controller;
 
+use App\Form\UserFormType;
 use App\Service\FileUploader;
 use App\Entity\UserProfile;
 use App\Form\ProfileFormType;
@@ -34,31 +35,72 @@ class UserController extends AbstractController
 
     /**
      * @Route("/messages/{user}", name="message_user")
+     * @param FirebaseConfig $firebaseConfig
+     * @param Request $request
+     * @param $user
+     * @return Response
      */
     public function viewUser(FirebaseConfig $firebaseConfig, Request $request, $user)
     {
         $currentUser = $this->getUser()->getUsername();
         $messages = $firebaseConfig->getMessages($currentUser, $user);
 
-        if ($request->isMethod('POST'))
-        {
-            $input = $request->get('message_input');
-            $input2 = $input." - ".$currentUser;
-            $firebaseConfig->setMessage($input2, $currentUser, $user);
+        $form = $this->createForm(UserFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form['attachment']->getData() && $form['messageInput']->getData() != null )
+            {
+                $input = $form['messageInput']->getData();
+                $input2 = $input . " - " . $currentUser;
+                $firebaseConfig->setMessage($input2, $currentUser, $user);
+
+                /** @var UploadedFile $uploadedFile */
+                $uploadedFile = file_get_contents($form['attachment']->getData());
+                $filename = $_FILES['user_form']['name']['attachment'];
+                $firebaseConfig->uploadFile($uploadedFile);
+                $url = $firebaseConfig->storageFileUrl($filename);
+                $firebaseConfig->setMessage($url, $currentUser, $user);
+
+            }
+            elseif ($form['messageInput']->getData() != null)
+            {
+                $input = $form['messageInput']->getData();
+                $input2 = $input . " - " . $currentUser;
+                $firebaseConfig->setMessage($input2, $currentUser, $user);
+            }
+            elseif ($form['attachment']->getData() != null)
+            {
+                /** @var UploadedFile $uploadedFile */
+                $uploadedFile = file_get_contents($form['attachment']->getData());
+                $filename = $_FILES['user_form']['name']['attachment'];
+                $firebaseConfig->uploadFile($uploadedFile);
+                $url = $firebaseConfig->storageFileUrl($filename);
+                $firebaseConfig->setMessage($url, $currentUser, $user);
+            }
 
         }
 
+        $files = $firebaseConfig->getFiles();
+
         return $this->render('user/messages.html.twig', [
             'messages' => $messages,
-            'selectedUsername' => $user
+            'selectedUsername' => $user,
+            'files' => $files,
+            'userForm' => $form->createView(),
         ]);
     }
 
     /**
      * @Route("/profile", name="user_profile")
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @param FirebaseConfig $firebaseConfig
+     * @return Response
      * @IsGranted("ROLE_USER")
      */
-    public function profile(Request $request, FileUploader $fileUploader)
+    public function profile(Request $request, FileUploader $fileUploader, FirebaseConfig $firebaseConfig)
     {
         $em = $this->getEntityManager();
         $users = count($em->getRepository('App:User')->findAll());
@@ -66,6 +108,8 @@ class UserController extends AbstractController
         $email = $this->getUser()->getEmail();
         $username = $this->getUser()->getUsername();
         $user = $this->getUser();
+
+        $messageCount = count($firebaseConfig->getAllMessages($username));
 
         $userProfile = new UserProfile();
 
@@ -108,7 +152,8 @@ class UserController extends AbstractController
             'profileForm' => $form->createView(),
             'username' => $username,
             'email' => $email,
-            'contacts' => $users
+            'contacts' => $users,
+            'msgCount' => $messageCount
         ]);
     }
 

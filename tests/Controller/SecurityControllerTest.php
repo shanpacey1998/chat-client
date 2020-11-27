@@ -1,4 +1,5 @@
 <?php
+declare(strict_type=1);
 
 namespace App\Tests\Controller;
 
@@ -24,8 +25,11 @@ class SecurityControllerTest extends WebTestCase
     {
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 
 >>>>>>> daf90324689f116017e1e50a3d230c376734f133
+>>>>>>> 71f797b15e7fdb850efa62e3858e3d139e2cdd4e
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123']);
         $this->client->followRedirect();
 
@@ -33,18 +37,24 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 
 
 
 >>>>>>> daf90324689f116017e1e50a3d230c376734f133
+>>>>>>> 71f797b15e7fdb850efa62e3858e3d139e2cdd4e
     }
 
     public function testItRegistersUser()
     {
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 
 >>>>>>> daf90324689f116017e1e50a3d230c376734f133
+>>>>>>> 71f797b15e7fdb850efa62e3858e3d139e2cdd4e
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'username' => '123']);
         $this->client->followRedirect();
 
