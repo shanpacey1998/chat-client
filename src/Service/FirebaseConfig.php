@@ -9,7 +9,6 @@ use Kreait\Firebase\Database;
 use Kreait\Firebase\Exception\DatabaseException;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Storage;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FirebaseConfig
 {
@@ -92,9 +91,9 @@ class FirebaseConfig
     }
 
     /**
-     * @param String $file
+     * @param string $file
      */
-    public function uploadFile(String $file): void
+    public function uploadFile(string $file): void
     {
         $storage = $this->getStorage();
         $bucket = $storage->getBucket();
@@ -109,8 +108,9 @@ class FirebaseConfig
      */
     public function getFiles()
     {
-        $factory = (new Factory)->withServiceAccount($_SERVER['DOCUMENT_ROOT'] . '/chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
+        $factory = (new Factory())->withServiceAccount($_SERVER['DOCUMENT_ROOT'] . '/chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
         $storage = $factory->createStorage();
+
         return $storage->getBucket()->objects();
     }
 
@@ -153,4 +153,3 @@ class FirebaseConfig
         return $url . $name . '?alt=media';
     }
 }
-
