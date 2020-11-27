@@ -13,6 +13,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class FeatureContext extends RawMinkContext implements Context
 {
     /**
+     *
+     * @Then the application's kernel should use :expected environment
+     *
      * @param string $expected
      *
      * @return bool

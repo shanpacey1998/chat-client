@@ -104,6 +104,10 @@
                  window.location.reload(true);
              }, 5000);
 
+             //automatically scrolls to show most recent message in chat on refresh
+             let objDiv = document.getElementById('message_box')
+             objDiv.scrollTop = objDiv.scrollHeight
+
              document.getElementById('user_form_attachment').style.opacity = '100'; //makes profile file upload elements visible
 
          });

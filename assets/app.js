@@ -9,14 +9,8 @@
 import './styles/app.less';
 import './chat';
 
-<<<<<<< HEAD
 // JS imports
 import './chat.js';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
-=======
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
-
->>>>>>> a925a5dd926723b2d1f86a7925cd3833f1717528
