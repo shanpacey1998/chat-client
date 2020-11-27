@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Form;
 
 
@@ -26,8 +25,10 @@ class ProfileFormType extends AbstractType
             ->add('imageFile', FileType::class, [
                 'mapped' => false,
                 'constraints' => [
-                    new Image()
-                ]
+
+                    new Image(),
+                ],
+
             ]);
     }
 
@@ -37,5 +38,5 @@ class ProfileFormType extends AbstractType
             'data_class' => UserProfile::class,
         ]);
     }
-
 }
+

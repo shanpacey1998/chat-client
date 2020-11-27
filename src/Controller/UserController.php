@@ -7,6 +7,7 @@ use App\Service\FileUploader;
 use App\Entity\UserProfile;
 use App\Form\ProfileFormType;
 use App\Service\FirebaseConfig;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/home", name="app_homepage")
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function homepage()
@@ -54,6 +56,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile", name="user_profile")
+     * @IsGranted("ROLE_USER")
      */
     public function profile(Request $request, FileUploader $fileUploader)
     {

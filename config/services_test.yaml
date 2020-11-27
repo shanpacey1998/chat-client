@@ -3,15 +3,4 @@ services:
     autowire: true
     autoconfigure: true
 
-#    App\Tests\Behat\FeatureContext:
-#        resource: '../tests/Behat/*'
-#        public: true
-#        arguments:
-#            - "%kernel.environment%"
-
-#  App\Features\FeatureContext:
-##      resource: '../features/bootstrap/*'
-##      public: true
-##      arguments:
-##          - "%kernel.environment%"
 

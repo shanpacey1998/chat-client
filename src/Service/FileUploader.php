@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -25,10 +23,11 @@ class FileUploader
         $destination = $this->uploadsPath;
 
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+        $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
 
         $uploadedFile->move($destination, $newFilename);
 
         return $newFilename;
     }
 }
+
