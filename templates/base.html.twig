@@ -9,19 +9,57 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
             <link rel="stylesheet" href="{{ asset('font-awesome.css') }}">
-            <!-- <link rel="stylesheet" href="{# {{ asset('build/app.css') }} #}"> -->
+            <link rel="stylesheet" href=" {{ asset('build/app.css') }} ">
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
 
-    <body style="background-color: #5eb5e0 ">
+    <body style="background-color: #82baf1 ">
+        {% if is_granted('IS_IMPERSONATOR') %}
+            <div class="alert alert-warning">
+                You are currently switched to this user
+                <a href="{{ path('app_homepage', {'_switch_user': '_exit'}) }}">Exit impersonation</a>
+            </div>
+        {% endif %}
 
         {% block body %}
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            <nav class="navbar navbar-expand navbar-dark mb-3" style="background-color: black ">
+                <a class="navbar" href="{{ path('app_homepage') }}">ChatApp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a style="color: #fff;" class="nav-link" href="{{ path('app_homepage') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: #fff;" class="nav-link" href="{{ path('user_profile') }}">Profile</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        {% if app.user %}
+
+                            <div class="container">
+                                <div class="row rounded" style="background-color: #99CDD8">
+                                    You are logged in as {{ app.user.username }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </form>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class=" rounded-circle" src="https://robohash.org/{{ app.user.username }}?size=50x50" alt="user icon">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ path('user_profile') }}">Profile</a>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            {% endif %}
+            </nav>
         {% endblock %}
 
 
@@ -29,7 +67,7 @@
             <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-            <!-- <script src="{#  {{ asset('build/app.js') }} #}" type="text/javascript"></script> -->
+            <script src="  {{ asset('build/app.js') }} " type="text/javascript"></script>
             {{ encore_entry_script_tags('app') }}
 
             <!-- //The core Firebase JS SDK is always required and must be listed first -->
@@ -56,12 +94,15 @@
                 firebase.analytics();
                 const database = firebase.database();
             </script>
+            <script>
+                 document.getElementById('profile_form_imageFile').style.opacity = '100'; //make bootstrap label for profile file upload invisible
+            </script>
         {% endblock %}
     </body>
-    </br>
-    <footer class="footer">
+    <br>
+    <footer class="footer text-center">
         <div class="container text-center">
-            <span class="text-muted">Made with <i class="fa fa-heart" style="color: black;"></i> by Shannon</span>
+            <span class="text-muted">Made with <i class="fa fa-heart" style=" color: black;"></i> by Shannon</span>
         </div>
     </footer>
 </html>
