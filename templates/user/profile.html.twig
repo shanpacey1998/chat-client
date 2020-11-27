@@ -4,19 +4,18 @@
 
 {% block body %}
     {{ parent() }}
-    <h3 class="text-center">Profile</h3>
-    </br>
-    </br>
-<div class="example-wrapper">
-    <h3 class="text-center"></h3>
-</div>
 
+
+<div class="example-wrapper container">
+    <h3 class="text-center">Profile</h3>
+</div>
+    <br>
     <div class="container">
         <div class="row user-menu-container rounded profile-box1">
             <div class="col-md-12 user-details">
-                <div class="row rounded" style="background-color: steelblue ">
+                <div class="row rounded profile-box1" >
                     <div class="col-md-2 ">
-
+                        <br>
                         <div class="user-image">
                             {% if app.user.userProfile.imagePath is defined %}
                                 <img width="150" height="150" src="{{ asset(app.user.userProfile.imagePath) }}" class="img-responsive thumbnail" alt="profile picture">
@@ -26,13 +25,13 @@
                        </div>
                         {# https://robohash.org/{{ app.user.username }}?size=100x100#}
                         <br>
-
-                        {{ form_start(profileForm) }}
-                        {{ form_row(profileForm.imageFile) }}
-                        <button type="submit" class="btn btn-primary" >Upload</button>
-                        {{ form_end(profileForm) }}
+                        <div>
+                            {{ form_start(profileForm) }}
+                            {{ form_row(profileForm.imageFile) }}
+                            <button type="submit" class="btn btn-primary" >Upload</button>
+                            {{ form_end(profileForm) }}
+                        </div>
                     </div>
-                    <br>
                     <div class="col-md-10 col-4">
                         <br>
                         <div class="text-center">
@@ -46,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row overview rounded profile-box2" style="background-color: #99CDD8 ">
+                <div class="row overview rounded profile-box2" >
                     <div class="col-md-4 user-pad text-center">
                         <h3>Total Messages</h3>
                         <h4>184,473</h4>
@@ -57,7 +56,7 @@
                     </div>
                     <div class="col-md-4 user-pad text-center">
                         <h3>Contacts</h3>
-                        <h4>163,984</h4>
+                        <h4>{{ contacts }}</h4>
                     </div>
                 </div>
             </div>

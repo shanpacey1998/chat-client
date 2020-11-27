@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+
+<h3 class="text-center">Messages</h3>
+
+    <div class="text-center col-md-6 container">
+        {% for userMessage in messages %}
+                <div class="profile-box1 text-center border">
+                    {% if userMessage is defined %}
+                        {% for message in userMessage %}
+                            <p>
+                                {{ message }}
+                            </p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+        {% endfor %}
+    </div><br>
+    <div class="text-center col-md-6 container">
+        <form method="post" action="{{ path('message_user') }}">
+            <label>
+                <input name="message_input" type="text">
+            </label>
+            <button class="btn btn-primary" type="submit" name="message">Send</button>
+        </form>
+    </div>
+
+{% endblock %}
