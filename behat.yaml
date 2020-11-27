@@ -1,0 +1,49 @@
+#default:
+#  suites:
+#    default:
+#
+#      contexts:
+#        - Tests\Behat\FeatureContext
+#        - Behat\MinkExtension\Context\MinkContext
+#
+#      extensions:
+#
+#        FriendsOfBehat\SymfonyExtension: ~
+#
+#        Behat\MinkExtension:
+#          selenium2: ~
+#          goutte: ~
+#          sessions:
+#            symfony:
+#              symfony: ~
+#default:
+#  suites:
+#    default:
+#      contexts:
+#        - ..\Behat\FeatureContext
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
+
+  extensions:
+
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: vendor/autoload.php
+      kernel:
+        environment: test
+        debug: true
+        path: 'src/Kernel.php'
+        class: 'App\Kernel' # previously was `AppKernel`
+
+#    FriendsOfBehat\MinkExtension:
+#      base_url: https://symfony-sandbox.dev.wrenkitchens.com/public/index.php/
+#      goutte: ~
+#      selenium2: ~
+
+    Behat\MinkExtension:
+      base_url: https://symfony-sandbox.dev.wrenkitchens.com/public/index.php/
+      goutte: ~
+      selenium2: ~

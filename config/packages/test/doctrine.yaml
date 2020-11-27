@@ -1,0 +1,3 @@
+doctrine:
+  dbal:
+    url: 'mysql://root:r00t@mysql.dev.wrenkitchens.com:3306/chat_client_test'

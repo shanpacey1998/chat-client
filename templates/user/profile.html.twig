@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h3 class="text-center">Profile</h3>
+    </br>
+    </br>
+<div class="example-wrapper">
+    <h3 class="text-center"></h3>
+</div>
+
+    <div class="container">
+        <div class="row user-menu-container rounded profile-box1">
+            <div class="col-md-12 user-details">
+                <div class="row rounded" style="background-color: steelblue ">
+                    <div class="col-md-2 ">
+
+                        <div class="user-image">
+                            {% if app.user.userProfile.imagePath is defined %}
+                                <img width="150" height="150" src="{{ asset(app.user.userProfile.imagePath) }}" class="img-responsive thumbnail" alt="profile picture">
+                            {% else %}
+                                <img src="https://robohash.org/{{ app.user.username }}?size=100x100" class="img-responsive thumbnail" alt="profile picture">
+                            {% endif %}
+                       </div>
+                        {# https://robohash.org/{{ app.user.username }}?size=100x100#}
+                        <br>
+
+                        {{ form_start(profileForm) }}
+                        {{ form_row(profileForm.imageFile) }}
+                        <button type="submit" class="btn btn-primary" >Upload</button>
+                        {{ form_end(profileForm) }}
+                    </div>
+                    <br>
+                    <div class="col-md-10 col-4">
+                        <br>
+                        <div class="text-center">
+                            <h3>Welcome back, {{ app.user.username }}!</h3>
+                            {% if app.user.email %}
+                                <h4 class="white"><i class="fa fa-envelope"></i> {{ app.user.email }}</h4>
+                            {% endif %}
+                            <a class="btn btn-labeled btn-info" href="{{ path('app_logout') }}">
+                                <span class="btn-label"><i class="fa fa-arrow-circle-left"></i></span>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row overview rounded profile-box2" style="background-color: #99CDD8 ">
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>Total Messages</h3>
+                        <h4>184,473</h4>
+                    </div>
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>Unread Messages</h3>
+                        <h4>15,032</h4>
+                    </div>
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>Contacts</h3>
+                        <h4>163,984</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
