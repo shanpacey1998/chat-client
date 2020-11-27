@@ -108,6 +108,9 @@
     "firebase/php-jwt": {
         "version": "v5.2.0"
     },
+    "friends-of-behat/mink": {
+        "version": "v1.8.0"
+    },
     "friends-of-behat/mink-browserkit-driver": {
         "version": "v1.4.0"
     },

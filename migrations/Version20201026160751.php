@@ -12,18 +12,30 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20201026160751 extends AbstractMigration
 {
+<<<<<<< HEAD
+    public function getDescription(): string
+=======
     public function getDescription() : string
+>>>>>>> daf90324689f116017e1e50a3d230c376734f133
     {
         return '';
     }
 
+<<<<<<< HEAD
+    public function up(Schema $schema): void
+=======
     public function up(Schema $schema) : void
+>>>>>>> daf90324689f116017e1e50a3d230c376734f133
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE reset_password_request');
     }
 
+<<<<<<< HEAD
+    public function down(Schema $schema): void
+=======
     public function down(Schema $schema) : void
+>>>>>>> daf90324689f116017e1e50a3d230c376734f133
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE reset_password_request (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, selector VARCHAR(20) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, hashed_token VARCHAR(100) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, requested_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', expires_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', INDEX IDX_7CE748AA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');

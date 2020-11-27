@@ -12,9 +12,8 @@ class FeatureContext extends RawMinkContext implements Context
 {
     private $passwordEncoder;
 
-    /**
-     * @Then the application's kernel should use :expected environment
-     *
+
+    /* @Then the application's kernel should use :expected environment
      */
     public function kernelEnvironmentShouldBe(string $expected)
     {
@@ -23,20 +22,19 @@ class FeatureContext extends RawMinkContext implements Context
 
         $environment = $kernel->getEnvironment();
 
-        if ($expected == $environment)
-        {
+
+        if ($expected == $environment) {
             return true;
         }
-
         return false;
     }
 
     /**
-     *
      * @Given /^the user "([^"]*)" with password "([^"]*)" and username "([^"]*)" does not exist$/
      */
     public function theUserDoesNotExist($email, $password, $username)
     {
+        $container = $this->bootstrapSymfony();
         $user = new User();
         $user->setEmail($email);
         $user->setPassword($password);
@@ -45,7 +43,6 @@ class FeatureContext extends RawMinkContext implements Context
         $em = $this->bootstrapSymfony()->get('doctrine')->getManager();
         $em->persist($user);
         $em->flush();
-
     }
 
     public function bootstrapSymfony()
@@ -69,5 +66,6 @@ class FeatureContext extends RawMinkContext implements Context
         $em->createQuery("DELETE FROM chat_client_test.user WHERE username = 'test123' ");
         $em->createQuery("DELETE FROM chat_client.user WHERE email = 'test@123.com' ");
     }
-
 }
+
+

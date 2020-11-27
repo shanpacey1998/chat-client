@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_type=1);
 
 namespace App\Service;
@@ -24,10 +25,11 @@ class FileUploader
         $destination = $this->uploadsPath;
 
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+        $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
 
         $uploadedFile->move($destination, $newFilename);
 
         return $newFilename;
     }
 }
+
