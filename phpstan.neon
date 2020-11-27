@@ -5,6 +5,7 @@ includes:
 parameters:
     ignoreErrors:
            - '#Call to an undefined method [a-zA-Z0-9\\_<>]+::(find|get|fetch)[A-Z][a-zA-Z]*\(\)#'
+           - '#Cannot call method [a-zA-Z0-9\\_]+::getUsername\(\) on object\|null#'
 
     symfony:
         container_xml_path: '%currentWorkingDirectory%/var/cache/dev/App_KernelDevDebugContainer.xml'
@@ -15,3 +16,6 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
 
     checkMissingIterableValueType: false
+
+    excludes_analyse:
+    	- tests/*

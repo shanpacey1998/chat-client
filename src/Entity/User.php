@@ -21,6 +21,8 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @var int
      */
     private $id;
 
@@ -28,28 +30,37 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank()
      * @Assert\Email()
+     *
+     * @var string
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     *
+     * @var array
      */
     private $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
+     *
+     * @var string
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
+     *
+     * @var string
      */
     private $username;
 
     /**
      * @ORM\OneToOne(targetEntity=UserProfile::class, mappedBy="user", cascade={"persist", "remove"})
+     *
+     * @var UserProfile
      */
     private $userProfile;
 

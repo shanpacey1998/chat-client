@@ -16,17 +16,23 @@ class UserProfile
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     *
+     * @var string|null
      */
     private $imageFilename;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="userProfile", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @var User
      */
     private $user;
 
