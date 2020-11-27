@@ -20,10 +20,10 @@ class UserFormType extends AbstractType
     {
         $builder
             ->add('messageInput', TextType::class, [
-                    'mapped' => false,
-                    'label' => false,
-                    'required' => false,
-                ])
+                'mapped' => false,
+                'label' => false,
+                'required' => false,
+            ])
             ->add('attachment', FileType::class, [
                 'mapped' => false,
                 'label' => false,

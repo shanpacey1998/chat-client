@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import $ from 'jquery';
 
 $(document).ready(function() {
@@ -15,3 +16,6 @@ $(document).ready(function() {
     }
 
 });
+=======
+document.getElementById('profile_form_imageFile').style.opacity = '100'; //make bootstrap label for profile file upload invisible
+>>>>>>> a925a5dd926723b2d1f86a7925cd3833f1717528

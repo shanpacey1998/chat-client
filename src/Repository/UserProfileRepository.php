@@ -19,5 +19,4 @@ class UserProfileRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, UserProfile::class);
     }
-
 }

@@ -39,6 +39,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/messages/{user}", name="message_user")
+     *
      * @IsGranted("ROLE_USER")
      *
      * @param FirebaseConfig $firebaseConfig
@@ -99,6 +100,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile", name="user_profile")
+     *
      * @IsGranted("ROLE_USER")
      *
      * @param Request $request

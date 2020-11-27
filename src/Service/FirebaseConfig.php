@@ -92,9 +92,9 @@ class FirebaseConfig
     }
 
     /**
-     * @param UploadedFile $file
+     * @param String $file
      */
-    public function uploadFile(UploadedFile $file): void
+    public function uploadFile(String $file): void
     {
         $storage = $this->getStorage();
         $bucket = $storage->getBucket();
@@ -109,8 +109,8 @@ class FirebaseConfig
      */
     public function getFiles()
     {
-        $storage = $this->getStorage();
-
+        $factory = (new Factory)->withServiceAccount($_SERVER['DOCUMENT_ROOT'] . '/chat-client-464de-firebase-adminsdk-8kmje-5e3f29d65e.json');
+        $storage = $factory->createStorage();
         return $storage->getBucket()->objects();
     }
 
@@ -153,3 +153,4 @@ class FirebaseConfig
         return $url . $name . '?alt=media';
     }
 }
+
