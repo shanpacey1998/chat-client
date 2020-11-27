@@ -25,24 +25,6 @@ class SecurityController extends AbstractController
      * @param Request $request
      * @return Response
      */
-//    public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator): Response
-//    {
-//        // if ($this->getUser()) {
-//        //     return $this->redirectToRoute('target_path');
-//        // }
-//        // get the login error if there is one
-//        $error = $authenticationUtils->getLastAuthenticationError();
-//        // last username entered by the user
-//        $lastUsername = $authenticationUtils->getLastUsername();
-//
-//        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER'))
-//        {
-//            return new RedirectResponse('/public/index.php/home');
-//        }
-//
-//        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-//    }
-
     public function login(AuthenticationUtils $authenticationUtils, Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
         // get the login error if there is one
