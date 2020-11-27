@@ -23,7 +23,6 @@ class SecurityControllerTest extends WebTestCase
     {
         $kernel = new Kernel('test', true);
         $kernel->boot();
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
 
         $this->client->request('POST', '/', ['email' => '123@123.com', 'password' => '123', 'agree terms' => true]);
         $this->client->followRedirect();
